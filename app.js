@@ -432,33 +432,28 @@ define(function(require){
 					);
 				};
 
-			if(self.connectivityId) {
-				getAccount();
-			}
-			else {
-				self.listAccounts(function(data, status) {
-					if(data.data.length) {
-						self.connectivityId = data.data[0];
+			self.listAccounts(function(data, status) {
+				if(data.data.length) {
+					self.connectivityId = data.data[0];
 
-						getAccount();
-					}
-					else {
-						self.createAccount(function(_data) {
-								self.listAccounts(function(data, status) {
-									self.connectivityId = data.data[0];
+					getAccount();
+				}
+				else {
+					self.createAccount(function(_data) {
+							self.listAccounts(function(data, status) {
+								self.connectivityId = data.data[0];
 
-									getAccount();
-								});
-							},
-							function(_data, status) {
-								var template = monster.template(self, '!' + self.i18n.active().error_signup, { status: status });
+								getAccount();
+							});
+						},
+						function(_data, status) {
+							var template = monster.template(self, '!' + self.i18n.active().error_signup, { status: status });
 
-								monster.ui.alert(template);
-							}
-						);
-					}
-				});
-			}
+							monster.ui.alert(template);
+						}
+					);
+				}
+			});
 		},
 
 		getNumber: function(phone_number, success, error) {
