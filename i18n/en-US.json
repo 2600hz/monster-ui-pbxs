@@ -26,6 +26,7 @@
 	"submit": "Submit",
 	"select_label": "Select",
 
+	"moreHelpSoon": "More configuration options coming soon!",
 	"is_static_ip": "Is your PBX on Static IP?",
 	"yes": "Yes",
 	"no": "No",

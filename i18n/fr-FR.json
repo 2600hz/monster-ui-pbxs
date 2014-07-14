@@ -20,6 +20,7 @@
 	"no_pbx_selected": "Vous n'avez pas sélectionné de PBX",
 	"friendly_name": "Nom de ce PBX",
 
+	"moreHelpSoon": "Plus de configurations disponibles à venir!",
 	"is_static_ip": "Est-ce que ce PBX utilise une IP statique?",
 	"yes": "Oui",
 	"no": "Non",
@@ -113,7 +114,7 @@
 	"currently_selected": "Vous avez sélectionné",
 
 	"add_pbx": "Ajouter PBX",
-	"numbers": "Numéros",
+	"numbersLabel": "Numéros",
 	"move": "Transférer vers",
 	"remove": "Désaffecter",
 	"buy": "Acheter",
