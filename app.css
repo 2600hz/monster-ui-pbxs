@@ -15,7 +15,7 @@
 	color: #666;
 	cursor: pointer;
 	display: inline-block;
-	font-weight: 500;
+	font-weight: 600;
 	line-height: 69px;
 	margin-right: 20px;
 	background: #fff;
@@ -34,7 +34,7 @@
 
 #edit_server .selected-pbx {
 	color: #22ccff;
-	font-weight: 500;
+	font-weight: 600;
 		font-size: 15px;
 }
 
@@ -237,7 +237,7 @@
 #edit_server .wizard-content-step .testing-block .configure-line .title > label{
 	color: #22ccff;
 	font-size: 16px;
-	font-weight: 500;
+	font-weight: 600;
 	text-align: right;
 }
 
@@ -255,7 +255,7 @@
 
 #edit_server .wizard-content-step .testing-block .testing-step.title {
 	font-size: 18px;
-	font-weight: 500;
+	font-weight: 600;
 	color: #fff;
 }
 
@@ -281,7 +281,7 @@
 #edit_server .header-step #phone_number_test {
 	color: #22ccff;
 	font-size: 18px;
-	font-weight: 500;
+	font-weight: 600;
 }
 
 #edit_server .wizard-automatic {
@@ -313,7 +313,7 @@
 
 #edit_server .wizard-automatic-step-content .progress-title {
 	font-size: 18px;
-	font-weight: 500;
+	font-weight: 600;
 }
 
 #edit_server .wizard-automatic-step-content table tr {
@@ -367,7 +367,7 @@
 	color: #eee;
 	cursor: pointer;
 	font-size: 14px;
-	font-weight: 500;
+	font-weight: 600;
 	height: 40px;
 	line-height: 38px;
 	min-width: 250px;
@@ -523,7 +523,7 @@
 	border-radius: 4px;
 	color: #22ccff;
 	font-size: 60px;
-	font-weight: 500;
+	font-weight: 600;
 	height: 51px;
 	margin: auto;
 	opacity: 0.9;
@@ -539,14 +539,14 @@
 	border: 3px solid #22ccff;
 	color: #22ccff;
 	cursor: pointer;
-	font-weight: 500;
+	font-weight: 600;
 	opacity: 1;
 }
 
 #ws-content #list_pbxs_navbar .pbx-wrapper.selected .img-wrapper{
 	border: 3px solid #22ccff;
 	color: #22ccff;
-	font-weight: 500;
+	font-weight: 600;
 }
 
 
@@ -634,7 +634,7 @@
 
 #ws-content #pbx_connector_container #actions_wrapper label{
 	font-size: 16px;
-	font-weight: 500;
+	font-weight: 600;
 }
 
 #ws-content #pbx_connector_container #actions_wrapper a.action-number {
@@ -963,13 +963,13 @@
 
 #edit_number .content .stats .title_stats {
 	font-size: 16px;
-	font-weight: 500;
+	font-weight: 600;
 }
 
 #edit_number .content .stats .stat_number {
 	font-size: 26px;
 	color: #22ccff;
-	font-weight: 500;
+	font-weight: 600;
 }
 
 #edit_number #foundDIDList {
@@ -1113,7 +1113,7 @@
 }
 
 #port_number .step_div .title {
-	font-weight: 500;
+	font-weight: 600;
 	font-size: 14px;
 	margin: 10px 0px 25px 15px;
 	text-align: left;
@@ -1139,7 +1139,7 @@
 /* Step 1 */
 #port_number .step_div.first {
 	width: 95%;
-	font-weight: 500;
+	font-weight: 600;
 }
 
 #port_number .step_div .split_div.last {
@@ -1180,7 +1180,7 @@
 	color: #22ccff;
 	margin-top: 5px;
 	font-size: 10px;
-	font-weight: 500;
+	font-weight: 600;
 }
 
 #port_number .step_div.first .other_carrier {
@@ -1227,7 +1227,7 @@
 	padding-bottom: 20px;
 	text-align: left;
 	border-bottom: 1px solid #ccc;
-	font-weight: 500;
+	font-weight: 600;
 	font-size: 15px;
 }
 
