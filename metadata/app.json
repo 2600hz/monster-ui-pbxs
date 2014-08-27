@@ -1,0 +1,35 @@
+{
+	"name": "pbxs",
+	"source_url": "http://webdev/monster-modules/pbxs",
+	"i18n": {
+		"en-US": {
+			"label": "PBX Connector",
+			"description": "PBX Connector allows you to connect your existing PBX to minutes and phone lines on our platform.",
+			"extended_description": "If you don't want to change the PBX you have been using, or if you want to continue using the same PBX for security reasons, it has never been easier to bring your own PBX while using Kazoo minutes and phone lines. This application allows you to select the brand of your PBX, create a username and password and get started instantly with your own hybrid PBX!",
+			"features": [
+				"Compliant with all major IP-PBXs (Avaya, Mitel, FreePBX, Asterisk, Cisco, blue.box etc.)",
+				"Simple 3-step process",
+				"Instant hybrid PBX set up"
+			]
+		}
+	},
+	"tags": [
+		"reseller",
+		"carrier"
+	],
+	"icon": "PBXconnector_app.png",
+	"api_url": "http://10.26.0.41:8000/v2",
+	"author": "2600Hz",
+	"version": "1.0",
+	"license": "-",
+	"price": 0,
+	"screenshots": [
+		"pbxconnector1.png",
+		"pbxconnector2.png"
+	],
+	"urls": {
+		"documentation": "{documentation_url}",
+		"howto": "{howto_video_url}"
+	},
+	"pvt_type": "app"
+}
