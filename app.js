@@ -787,7 +787,7 @@ define(function(require){
 			return data;
 		},
 
-		normalizeEndpointData: function(data) {
+		cleanFormData: function(data) {
 			var self = this;
 
 			if(data.server_name === '' || !('server_name' in data)) {
@@ -804,7 +804,7 @@ define(function(require){
 				index = endpointData.extra.serverid,
 				new_data = $.extend(true, {}, data.data);
 
-			self.normalizeEndpointData(endpointData);
+			self.cleanFormData(endpointData);
 
 			if(endpointData.server_name) {
 				if((index || index === 0) && index != 'new') {
@@ -830,32 +830,36 @@ define(function(require){
 					}, endpointData));
 				}
 
-				monster.request({
-					resource: 'oldTrunkstore.update',
-					data: {
-						accountId: self.accountId,
-						connectivityId: self.connectivityId,
-						data: new_data
-					},
-					success: function(_data, status) {
-						if(typeof success == 'function') {
-							success(_data, status);
-						}
-					},
-					error: function(_data, status) {
-						if(typeof error == 'function') {
-							error(_data, status);
-						}
-					}
-				});
+				self.updateOldTrunkstore(new_data, success, error);
 			}
 			else {
 				monster.ui.alert('formatting_error');
 			}
 		},
 
+		normalizeData: function(data) {
+			var self = this;
+
+			// We don't accept false for a disabled feature anymore, so we delete the key now. 
+			// We also delete empty key set at the servers level
+			$.each(data.servers, function(k, server) {
+				delete data.servers[k][''];
+				$.each(server.DIDs, function(k2, number) {
+					$.each(number, function(k3, feature) {
+						if(feature === false) {
+							delete data.servers[k].DIDs[k2][k3];
+						}
+					});
+				});
+			});
+
+			return data;
+		},
+
 		updateOldTrunkstore: function(data, success, error) {
 			var self = this;
+
+			self.normalizeData(data);
 
 			monster.request({
 				resource: 'oldTrunkstore.update',
@@ -1573,65 +1577,65 @@ define(function(require){
 
 			pbxsManager.on('click', '.failover-number', function() {
 				var failoverCell = $(this).parents('.number-wrapper').first(),
-                    phoneNumber = failoverCell.data('phone_number');
+					phoneNumber = failoverCell.data('phone_number');
 
-                if(phoneNumber) {
-                    var args = {
-                        phoneNumber: phoneNumber,
-                        callbacks: {
-                            success: function(data) {
-                                if('failover' in data.data) {
-                                    if(failoverCell.find('.features i.icon-thumbs-down').size() === 0) {
-                                        failoverCell
-                                            .find('.features')
-                                            .append('<i class="icon-green icon-thumbs-down"></i>')
-                                    }
-                                }
-                                else {
-                                    failoverCell
-                                        .find('.features i.icon-thumbs-down')
-                                        .remove()
-                                }
-                            }
-                        }
-                    };
+				if(phoneNumber) {
+					var args = {
+						phoneNumber: phoneNumber,
+						callbacks: {
+							success: function(data) {
+								if('failover' in data.data) {
+									if(failoverCell.find('.features i.icon-thumbs-down').size() === 0) {
+										failoverCell
+											.find('.features')
+											.append('<i class="icon-green icon-thumbs-down"></i>')
+									}
+								}
+								else {
+									failoverCell
+										.find('.features i.icon-thumbs-down')
+										.remove()
+								}
+							}
+						}
+					};
 
-                    monster.pub('common.failover.renderPopup', args);
-                }
+					monster.pub('common.failover.renderPopup', args);
+				}
 			});
 
 			pbxsManager.on('click', '.cnam-number', function() {
-                var cnamCell = $(this).parents('.number-wrapper').first(),
-                    phoneNumber = cnamCell.data('phone_number');
+				var cnamCell = $(this).parents('.number-wrapper').first(),
+					phoneNumber = cnamCell.data('phone_number');
 
-                if(phoneNumber) {
+				if(phoneNumber) {
 					var args = {
 						phoneNumber: phoneNumber,
 						callbacks: {
 							success: function(data) {
 								if(!($.isEmptyObject(data.data.cnam))) {
 									if(cnamCell.find('.features i.icon-user').size() === 0) {
-                                		cnamCell
-                                			.find('.features')
-                                			.append('<i class="icon-green icon-user"></i>')
+										cnamCell
+											.find('.features')
+											.append('<i class="icon-green icon-user"></i>')
 									}
-                            	}
-                            	else {
-                                	cnamCell
-                                		.find('.features i.icon-user')
-                                		.remove()
-                            	}
-                            }
+								}
+								else {
+									cnamCell
+										.find('.features i.icon-user')
+										.remove()
+								}
+							}
 						}
 					};
 
 					monster.pub('common.callerId.renderPopup', args);
-                }
+				}
 			});
 
 			pbxsManager.on('click', '.e911-number', function() {
-                var e911Cell = $(this).parents('.number-wrapper').first(),
-                    phoneNumber = e911Cell.data('phone_number');
+				var e911Cell = $(this).parents('.number-wrapper').first(),
+					phoneNumber = e911Cell.data('phone_number');
 
 				if(phoneNumber) {
 					var args = {
@@ -1639,17 +1643,17 @@ define(function(require){
 						callbacks: {
 							success: function(data) {
 								if(!($.isEmptyObject(data.data.dash_e911))) {
-                                    if(e911Cell.find('.features i.icon-ambulance').size() === 0) {
-                                        e911Cell
-                                            .find('.features')
-                                            .append('<i class="icon-green icon-ambulance"></i>')
-                                    }
-                                }
-                                else {
-                                    e911Cell
-                                        .find('.features i.icon-ambulance')
-                                        .remove()
-                                }
+									if(e911Cell.find('.features i.icon-ambulance').size() === 0) {
+										e911Cell
+											.find('.features')
+											.append('<i class="icon-green icon-ambulance"></i>')
+									}
+								}
+								else {
+									e911Cell
+										.find('.features i.icon-ambulance')
+										.remove()
+								}
 							}
 						}
 					};
