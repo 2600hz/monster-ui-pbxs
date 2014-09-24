@@ -220,7 +220,7 @@ define(function(require){
 							use_t38: true
 						},
 						extra: {
-							support_email: (monster.config.port || {}).support_email || 'support@trunking.io',
+							support_email: monster.config.support_email || 'support@2600hz.com',
 							pbx_help_link: monster.config.pbx_help_link || 'https://2600hz.atlassian.net/wiki/display/docs/Trunking.io',
 							pbx_help_configuration_link: monster.config.pbx_help_configuration_link || 'https://2600hz.atlassian.net/wiki/display/docs/Trunking_config.io',
 							configure: 'manually',
@@ -385,43 +385,6 @@ define(function(require){
 			});
 		},
 
-		getAutomaticStatus: function(data) {
-			var self = this;
-				list_steps = [
-					'init',
-					'registration',
-					'options',
-					'options_period',
-					'outbound_call',
-					'inbound_call',
-					'dtmf_test',
-					'reset_dtmf',
-					'fax_test',
-					'settings'
-				],
-				sip_id = monster.config.sip_id ? monster.config.sip_id : (monster.config.sip_id = monster.util.randomString(20));
-
-			var step = list_steps.indexOf(data.step) > -1 ? data.step : 'init';
-
-			monster.request({
-				resource: 'pbxsManager.get_automatic_status',
-				data: {
-					sip_id: sip_id,
-					settings_step: step
-				},
-				success: function(data, status) {
-					if(typeof success == 'function') {
-						success(data, status);
-					}
-				},
-				error: function(data, status) {
-					if(typeof error == 'function') {
-						error(data, status);
-					}
-				}
-			});
-		},
-
 		listServers: function(success, error) {
 			var self = this,
 				getAccount = function() {
@@ -496,29 +459,6 @@ define(function(require){
 				error: function(_data, status) {
 					if(typeof error === 'function') {
 						error(_data);
-					}
-				}
-			});
-		},
-
-		portNumber: function(data, success, error) {
-			var self = this;
-
-			monster.request({
-				resource: 'pbxsManager.port',
-				data: {
-					accountId: self.accountId,
-					phoneNumber: encodeURIComponent(data.phone_number),
-					data: data.options || {}
-				},
-				success: function(_data, status) {
-					if(typeof success == 'function') {
-						success(_data, status);
-					}
-				},
-				error: function(_data, status) {
-					if(typeof error == 'function') {
-						error(_data, status);
 					}
 				}
 			});
@@ -616,171 +556,6 @@ define(function(require){
 			});
 		},
 
-		createNumberDoc: function(data, success, error) {
-			var self = this;
-
-			monster.request({
-				resource: 'pbxsManager.createDoc',
-				data: {
-					accountId: self.accountId,
-					phoneNumber: encodeURIComponent(data.phone_number),
-					fileName: data.file_name,
-					data: data.file_data
-				},
-				success: function(_data, status) {
-					if(typeof success == 'function') {
-						success(_data, status);
-					}
-				},
-				error: function(_data, status) {
-					if(typeof error == 'function') {
-						error(_data, status);
-					}
-				}
-			});
-		},
-
-		submitPort: function(portData, number_data, callback) {
-			var self = this,
-				uploads_done = 0,
-				put_port_data = function() {
-					number_data.options.port = portData.port;
-
-					//todo phone nbr/data/cb
-					self.updateNumber(number_data.phone_number, number_data.options, function(data) {
-						if(typeof callback == 'function') {
-							callback(data);
-						}
-					});
-				},
-				put_port_doc = function(index) {
-					/* Add files */
-					self.createNumberDoc({
-							phone_number: number_data.phone_number,
-							fileName: portData.loa[0].file_name,
-							file_data: portData.loa[0].file_data
-						},
-						function(_data, status) {
-							self.createNumberDoc({
-									phone_number: number_data.phone_number,
-									file_name: portData.files[index].file_name,
-									file_data: portData.files[index].file_data
-								},
-								function(_data, status) {
-									put_port_data();
-								}
-							);
-						}
-					);
-				};
-
-			if(portData.port.main_number === number_data.phone_number) {
-				put_port_doc(0);
-			}
-			else{
-				put_port_data();
-			}
-		},
-
-		addFreeformNumbers: function(numbersData, callback) {
-			var self = this,
-				numberData;
-
-			if(numbersData.length > 0) {
-				var phoneNumber = numbersData[0].phoneNumber.match(/^\+?1?([2-9]\d{9})$/),
-					error = function() {
-						var errorNumber = numbersData[0].phone_number,
-							template = monster.template(self, '!' + self.i18n.active().error_acquire, { phoneNumber: errorNumber });
-
-						monster.ui.confirm(template,
-							function() {
-								self.addFreeformNumbers(numbersData, callback);
-							},
-							function() {
-								self.addFreeformNumbers(numbersData.slice(1), callback);
-							}
-						);
-					};
-
-				if(phoneNumber && phoneNumber[1]) {
-					self.createNumber(phoneNumber[1],
-						function() {
-							self.activateNumber(phoneNumber[1],
-								function(_data, status) {
-									self.addFreeformNumbers(numbersData.slice(1), callback);
-								},
-								function(_data, status) {
-									error();
-								}
-							);
-						},
-						function() {
-							error();
-						}
-					);
-				}
-				else {
-					error();
-				}
-			}
-			else {
-				if(typeof callback === 'function') {
-					callback();
-				}
-			}
-		},
-
-		// [10/17/13 ; max] Should not be used anymore, will be cleaned up when it is certain that we won't use it anymore.
-		/*addNumbers: function(globalData, index, numbersData, callback) {
-			var self = this,
-				numberData;
-
-			if(numbersData.length > 0) {
-				var phoneNumber = numbersData[0].phone_number.match(/^\+?1?([2-9]\d{9})$/),
-					error = function() {
-						var errorNumber = numbersData[0].phone_number,
-							template = monster.template(self, '!' + self.i18n.active().error_acquire, { phoneNumber: errorNumber });
-
-						monster.ui.confirm(template,
-							function() {
-								self.addNumbers(globalData, index, numbersData, callback);
-							},
-							function() {
-								self.addNumbers(globalData, index, numbersData.slice(1), callback);
-							}
-						);
-					};
-
-				if(phoneNumber[1]) {
-					self.activateNumber(phoneNumber[1],
-						function(_data, status) {
-							globalData.data.servers[index].DIDs[_data.data.id] = {
-								failover: false,
-								cnam: false,
-								dash_e911: false
-							};
-
-							self.addNumbers(globalData, index, numbersData.slice(1), callback);
-						},
-						function(_data, status) {
-							error();
-						}
-					);
-				}
-				else {
-					error();
-				}
-			}
-			else {
-				self.updateOldTrunkstore(globalData.data, function(updatedData) {
-					self.renderList(index, undefined, undefined, updatedData.data.servers);
-					if(typeof callback === 'function') {
-						callback();
-					}
-				});
-			}
-		},*/
-
 		cleanPhoneNumberData: function(data) {
 			var self = this;
 
@@ -792,6 +567,10 @@ define(function(require){
 
 			if(data.server_name === '' || !('server_name' in data)) {
 				data.server_name = "PBX " + data.extra.serverid;
+			}
+
+			if(data.hasOwnProperty('extra') && data.extra.hasOwnProperty('compatibilityMode')) {
+				data.options.media_handling = data.extra.compatibilityMode === true ? 'process' : 'bypass';
 			}
 
 			delete data.extra;
@@ -1063,77 +842,6 @@ define(function(require){
 						});
 					});
 				},
-				automatic_wizard_success = function() {
-					array_substep[current_automatic_step - 2].current_step++;
-					var i = current_automatic_step - 2;
-					if(array_substep[i].current_step <= array_substep[i].total_step) {
-						var step_success = array_substep[i].current_step - 1,
-							total_step = array_substep[i].total_step,
-							displayed_pct = (step_success / total_step)*100;
-
-						array_substep[i].displayed_pct = displayed_pct;
-
-						$('.wizard-automatic-step[data-value='+ current_automatic_step +'] tr:nth-child('+ step_success +') .icon-ok-sign', endpointHtml).show();
-						$('.wizard-automatic-step[data-value='+ current_automatic_step +'] .progress .bar', endpointHtml).css('width', displayed_pct + '%');
-						return;
-					}
-					else if(i+2 >= current_automatic_step) {
-						$('.wizard-automatic-step[data-value='+ current_automatic_step +'] tr .icon-ok-sign', endpointHtml).show();
-						$('.wizard-automatic-step[data-value='+ current_automatic_step +'] .progress .bar', endpointHtml).css('width', '100%');
-						array_substep[i].displayed_pct = 100;
-						setTimeout(function() {
-							$('.wizard-automatic-step[data-value="' + current_automatic_step + '"]', endpointHtml).hide();
-							$('.wizard-automatic-step[data-value="' + ++current_automatic_step +'"]', endpointHtml).show();
-							$('.testing-progress .testing-step[data-step="' + (current_automatic_step - 2) + '"] .icon-ok-sign', endpointHtml).show();
-						}, 2000);
-
-						return;
-					}
-				},
-				reset_auto_step = function() {
-					clear_intervals();
-					$('.wizard-automatic-step[data-value='+ current_automatic_step +'] .progress .bar', endpointHtml).css('width', '0%');
-					$('td .icon-ok-sign:not(.result)', endpointHtml).hide();
-					$.each(array_substep, function(k, v) {
-						v.current_step = 1;
-					});
-				},
-				clear_intervals = function(_interval) {
-					if(typeof _interval !== 'undefined') {
-						clearInterval(_interval);
-					}
-					else {
-						clearInterval(interval);
-						clearInterval(interval_bar);
-					}
-				},
-				move_bar = function() {
-					var array_index = array_substep[current_automatic_step-2],
-						current_step = array_index.current_step,
-						total_step = array_index.total_step;
-
-					if(!('displayed_pct' in array_substep[current_automatic_step-2])) {
-						array_substep[current_automatic_step-2].displayed_pct = ((current_step - 1) / total_step) * 100;
-					}
-
-					array_index = array_substep[current_automatic_step-2];
-
-					var next_pct = ((current_step) / total_step) * 100,
-						current_pct = array_index.displayed_pct,
-						new_pct = current_pct + ((next_pct - current_pct) / 10);
-
-					array_substep[current_automatic_step-2].displayed_pct = new_pct;
-
-					$('.wizard-automatic-step[data-value='+ current_automatic_step +'] .progress .bar', endpointHtml).css('width', new_pct + '%');
-				},
-				array_substep = [
-					{ current_step: 1, total_step: 3, api: ['registration', 'options', 'options_period']},
-					{ current_step: 1, total_step: 4, api: ['outbound_call', 'inbound_call', 'dtmf_test']},
-					{ current_step: 1, total_step: 4, api: []},
-					{ current_step: 1, total_step: 2, api: []},
-					{ current_step: 1, total_step: 1, api: []},
-					{ current_step: 1, total_step: 2, api: []}
-				],
 				cfg = {},
 				dataTemplate = _.extend({ i18n: { supportEmail: endpointData.extra.support_email }}, endpointData),
 				endpointHtml = $(monster.template(self, 'endpoint', dataTemplate));
@@ -1154,35 +862,7 @@ define(function(require){
 			self.initializeWizard(endpointHtml, submit_wizard_callback);
 
 			$('.static-ip-block', endpointHtml).hide();
-			$('.testing-block', endpointHtml).hide();
 			$('.static-ip-block[data-value="'+ endpointData.auth.auth_method +'"]', endpointHtml).show();
-			$('.testing-block[data-value="'+ endpointData.extra.configure +'"]', endpointHtml).show();
-
-			$('#stop_tests', endpointHtml).on('click', function() {
-				pause_polling = true;
-				monster.ui.confirm(self.i18n.active().stop_test_warning, function() {
-					reset_auto_step();
-					$('.testing-block', endpointHtml).hide();
-					$('.testing-block[data-value="manually"]', endpointHtml).slideDown();
-					$('.wizard-automatic-step', endpointHtml).hide();
-					$('input[type="radio"][value="manually"]', endpointHtml).prop('checked', true);
-
-					current_automatic_step = 1;
-					$('.wizard-buttons', endpointHtml).show();
-				}, function() {
-					pause_polling = false;
-				});
-			});
-
-			$('.skip_test', endpointHtml).on('click', function() {
-				array_substep[current_automatic_step - 2].current_step = array_substep[current_automatic_step - 2].total_step + 1;
-				$('.wizard-automatic-step[data-value="' + current_automatic_step + '"]', endpointHtml).hide();
-
-				var $automatic_step = $('.wizard-automatic-step[data-value='+ ++current_automatic_step +']', endpointHtml);
-				$automatic_step.show();
-				$('tr .icon-ok-sign', $automatic_step).hide();
-				$('.progress .bar', $automatic_step).css('width', '0%');
-			});
 
 			$('.btn-group .btn', endpointHtml).on('click', function(ev) {
 				ev.preventDefault();
@@ -1212,103 +892,6 @@ define(function(require){
 				ev.preventDefault();
 
 				submit_wizard_callback();
-			});
-
-			$('input[type="radio"][name="extra.configure"]', endpointHtml).on('click', function() {
-				reset_auto_step();
-				$('.testing-block', endpointHtml).hide();
-				$('.testing-block[data-value="'+$(this).val()+'"]', endpointHtml).slideDown();
-				$('.wizard-automatic-step', endpointHtml).hide();
-
-				if($(this).val() === 'automatically') {
-					$('.wizard-automatic-step[data-value="'+ current_automatic_step +'"]', endpointHtml).show();
-					$('.header-step', endpointHtml).hide();
-					$('.wizard-buttons', endpointHtml).hide();
-				}
-				else {
-					current_automatic_step = 1;
-					$('.wizard-buttons', endpointHtml).show();
-				}
-			});
-
-			$('#phone_number_test', endpointHtml).on('click', function() {
-				automatic_wizard_success();
-			});
-
-			$('#start_test', endpointHtml).click(function(ev) {
-				ev.preventDefault();
-				if(!('sip_id' in monster.config)) {
-					monster.config.sip_id = monster.util.randomString(32);
-				}
-
-				reset_auto_step();
-				pause_polling = false;
-
-				var polling_interval = 2,
-					move_bar_interval = 0.5,
-					stop_polling = false,
-					function_move_bar = function() {
-						if(Math.floor((Math.random()*10)+1) > 3) {
-							move_bar();
-						}
-					},
-					function_polling = function() {
-						if($('.testing-block[data-value="automatically"]:visible', endpointHtml).size() > 0) {
-							if(pause_polling === false) {
-								var api_name = '',
-									v = array_substep[current_automatic_step - 2];
-
-								if(v.current_step <= v.total_step) {
-									if(v.api[v.current_step - 1] !== undefined) {
-										api_name = v.api[v.current_step-1];
-									}
-									else {
-										stop_polling = true;
-									}
-								}
-
-								if(stop_polling) {
-									clear_intervals();
-								}
-								else {
-									monster.request({
-										resource: 'pbxsManager.get_automatic_status',
-										data: {
-											sip_id: monster.config.sip_id,
-											settings_step: api_name
-										},
-										success: function(_data) {
-											if(_data.status === 'success' || _data.status === 'succes') {
-												automatic_wizard_success();
-											}
-										},
-										error: function(_data) {
-
-										}
-									});
-								}
-							}
-						}
-						else {
-							clear_intervals();
-						}
-					};
-
-				interval = setInterval(function_polling, polling_interval * 1000);
-				interval_bar = setInterval(function_move_bar, move_bar_interval * 1000);
-
-				$('#phone_number_test', endpointHtml).html(monster.util.formatPhoneNumber($('#test_number', endpointHtml).val()));
-				$('.wizard-automatic-step', endpointHtml).hide();
-				$('.wizard-automatic-step[data-value="'+ ++current_automatic_step +'"]', endpointHtml).show();
-				$('.header-step', endpointHtml).show();
-			});
-
-			$('#cancel_test', endpointHtml).click(function(ev) {
-				ev.preventDefault();
-
-				if('cancelSuccess' in callbacks && typeof callbacks.cancelSuccess === 'function') {
-					callbacks.cancelSuccess();
-				}
 			});
 
 			$('input[type="radio"][name="auth.auth_method"]', endpointHtml).on('click', function() {
@@ -1348,6 +931,8 @@ define(function(require){
 				$('#list_pbxs_navbar', parent).hide();
 			}
 
+			endpointHtml.find('.switch').bootstrapSwitch()
+			monster.ui.protectField(endpointHtml.find('#auth_password'), endpointHtml);
 			monster.ui.validate(endpointHtml.find('#endpoint'), {
 				rules: {
 					"auth.ip": {
@@ -1743,7 +1328,7 @@ define(function(require){
 			var self = this,
 				serverId;
 
-			parent.find('.icon-question-sign[data-toggle="tooltip"]').tooltip();
+			parent.find('[data-toggle="tooltip"]').tooltip();
 
 			parent.find('.link-box.assign').on('click', function() {
 				var numbersData = [];

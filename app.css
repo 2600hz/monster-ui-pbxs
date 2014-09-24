@@ -219,7 +219,7 @@
 }
 
 #edit_server .wizard-content-step .testing-block .configure-line {
-	margin-top: 25px;
+	margin-top: 5px;
 }
 
 #edit_server .wizard-content-step .testing-block .configure-line [data-toggle="tooltip"] {
@@ -236,8 +236,9 @@
 
 #edit_server .wizard-content-step .testing-block .configure-line .title > label{
 	color: #22ccff;
-	font-size: 16px;
+	font-size: 14px;
 	font-weight: 600;
+	line-height: 40px;
 	text-align: right;
 }
 
@@ -623,8 +624,8 @@
 }
 
 #ws-content #pbx_connector_container #actions_wrapper #count_phones {
-	color: #aaa;
-	font-size: 24px;
+	color: #22ccff;
+	font-size: 18px;
 	margin: 0 25px 0px 3px;
 }
 
