@@ -6,10 +6,14 @@ define(function(require){
 		nicescroll = require('nicescroll');
 
 	var app = {
+		name: 'pbxs',
 
-		name: "pbxs",
+		css: [ 'app' ],
 
-		i18n: [ 'en-US', 'fr-FR' ],
+		i18n: { 
+			'en-US': { customCss: false },
+			'fr-FR': { customCss: false }
+		},
 
 		requests: {
 			'pbxsManager.listCallflows': {
