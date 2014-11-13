@@ -1,6 +1,6 @@
 <div id="pbx_connector_container" data-id="{{extra.id}}">
 	<div class="box-top-blue pbx-title">
-		<img width="80" height="56" src="apps/pbxs/static/images/endpoints/{{img_link}}.png" class="img-style">{{server_name}}
+		<img width="80" height="56" src="apps/pbxs/style/static/images/endpoints/{{img_link}}.png" class="img-style">{{server_name}}
 		<span class="pull-right">
 			<div class="navbar">
 				<ul class="nav pull-right">
@@ -29,7 +29,7 @@
 					<a href="#" id="move_numbers" role="button" class="action-number dropdown-toggle" data-toggle="dropdown"><i class="icon-share-alt icon-orange"></i><span class="action-text">{{ i18n.move }}</span></a>
 					<ul class="dropdown-menu">
 						{{#each servers_list}}
-							<li class="pbx-dropdown" data-index="{{index}}"><a href="#"><img width="45" height="32" src="apps/pbxs/static/images/endpoints/{{img_link}}.png" class="img_style"/>{{server_name}}</a></li>
+							<li class="pbx-dropdown" data-index="{{index}}"><a href="#"><img width="45" height="32" src="apps/pbxs/style/static/images/endpoints/{{img_link}}.png" class="img_style"/>{{server_name}}</a></li>
 						{{else}}
 							<li class="pbx-dropdown empty">{{ i18n.no_pbx }}</li>
 						{{/each}}

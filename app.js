@@ -1529,7 +1529,7 @@ define(function(require){
 
 						$.inArray(imgLink, self.listAvailablePbxs()) < 0 ? imgLink = 'other' : true;
 
-						$('#pbxs_manager_listpanel .pbx-wrapper[data-id="'+k+'"] .img-wrapper', parent).append('<img class="img_style" src="'+self.appPath+'/static/images/endpoints/'+ imgLink +'.png" height="49" width=72"/>');
+						$('#pbxs_manager_listpanel .pbx-wrapper[data-id="'+k+'"] .img-wrapper', parent).append('<img class="img_style" src="'+self.appPath+'/style/static/images/endpoints/'+ imgLink +'.png" height="49" width=72"/>');
 					});
 
 					callback && callback(data);
