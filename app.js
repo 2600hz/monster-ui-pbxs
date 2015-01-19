@@ -17,66 +17,6 @@ define(function(require){
 		},
 
 		requests: {
-			'pbxsManager.listCallflows': {
-				url: 'accounts/{accountId}/callflows',
-				verb: 'GET'
-			},
-			'pbxsManager.getAccount': {
-				url: 'accounts/{accountId}',
-				verb: 'GET'
-			},
-			'pbxsManager.listNumbers': {
-				url: 'accounts/{accountId}/phone_numbers',
-				verb: 'GET'
-			},
-			'pbxsManager.get': {
-				url: 'accounts/{accountId}/phone_numbers/{phoneNumber}',
-				verb: 'GET'
-			},
-			'pbxsManager.update': {
-				url: 'accounts/{accountId}/phone_numbers/{phoneNumber}',
-				verb: 'POST'
-			},
-			'pbxsManager.activate': {
-				url: 'accounts/{accountId}/phone_numbers/{phoneNumber}/activate',
-				verb: 'PUT'
-			},
-			'pbxsManager.search': {
-				url: 'phone_numbers?prefix={prefix}&quantity={quantity}',
-				verb: 'GET'
-			},
-			'pbxsManager.delete': {
-				url: 'accounts/{accountId}/phone_numbers/{phoneNumber}',
-				verb: 'DELETE'
-			},
-			'pbxsManager.create': {
-				url: 'accounts/{accountId}/phone_numbers/{phoneNumber}/docs/{fileName}',
-				verb: 'PUT'
-			},
-			'pbxsManager.port': {
-				url: 'accounts/{accountId}/phone_numbers/{phoneNumber}/port',
-				verb: 'PUT'
-			},
-			'pbxsManager.createDoc': {
-				url: 'accounts/{accountId}/phone_numbers/{phoneNumber}/docs/{fileName}',
-				verb: 'PUT'
-			},
-			'oldTrunkstore.create': {
-				url: 'accounts/{accountId}/connectivity',
-				verb: 'PUT'
-			},
-			'oldTrunkstore.list': {
-				url: 'accounts/{accountId}/connectivity',
-				verb: 'GET'
-			},
-			'oldTrunkstore.get': {
-				url: 'accounts/{accountId}/connectivity/{connectivityId}',
-				verb: 'GET'
-			},
-			'oldTrunkstore.update': {
-				url: 'accounts/{accountId}/connectivity/{connectivityId}',
-				verb: 'POST'
-			}
 		},
 
 		subscribe: {
@@ -150,8 +90,8 @@ define(function(require){
 
 			monster.parallel({
 				realm: function(callback){
-					 monster.request({
-						resource: 'pbxsManager.getAccount',
+					 self.callApi({
+						resource: 'account.get',
 						data: {
 							accountId: self.accountId,
 						},
@@ -264,8 +204,8 @@ define(function(require){
 		listAllNumbers: function(success, error) {
 			var self = this;
 
-			monster.request({
-				resource: 'pbxsManager.listNumbers',
+			self.callApi({
+				resource: 'numbers.list',
 				data: {
 					accountId: self.accountId,
 				},
@@ -285,8 +225,8 @@ define(function(require){
 		listCallflows: function(success, error) {
 			var self = this;
 
-			monster.request({
-				resource: 'pbxsManager.listCallflows',
+			self.callApi({
+				resource: 'callflow.list',
 				data: {
 					accountId: self.accountId,
 				},
@@ -306,8 +246,8 @@ define(function(require){
 		createAccount: function(success, error) {
 			var self = this;
 
-			monster.request({
-				resource: 'pbxsManager.getAccount',
+			self.callApi({
+				resource: 'account.get',
 				data: {
 					accountId: self.accountId,
 				},
@@ -326,8 +266,8 @@ define(function(require){
 						servers: []
 					};
 
-					monster.request({
-						resource: 'oldTrunkstore.create',
+					self.callApi({
+						resource: 'connectivity.create',
 						data: {
 							accountId: self.accountId,
 							data: account_data
@@ -350,8 +290,8 @@ define(function(require){
 		listAccounts: function(success, error) {
 			var self = this;
 
-			monster.request({
-				resource: 'oldTrunkstore.list',
+			self.callApi({
+				resource: 'connectivity.list',
 				data: {
 					accountId: self.accountId,
 				},
@@ -371,8 +311,8 @@ define(function(require){
 		getAccount: function(success, error) {
 			var self = this;
 
-			monster.request({
-				resource: 'oldTrunkstore.get',
+			self.callApi({
+				resource: 'connectivity.get',
 				data: {
 					accountId: self.accountId,
 					connectivityId: self.connectivityId
@@ -427,8 +367,8 @@ define(function(require){
 		getNumber: function(phone_number, success, error) {
 			var self = this;
 
-			monster.request({
-				resource: 'pbxsManager.get',
+			self.callApi({
+				resource: 'numbers.get',
 				data: {
 					accountId: self.accountId,
 					phoneNumber: encodeURIComponent(phone_number)
@@ -449,8 +389,8 @@ define(function(require){
 		updateNumber: function(phone_number, data, success, error) {
 			var self = this;
 
-			monster.request({
-				resource: 'pbxsManager.update',
+			self.callApi({
+				resource: 'numbers.update',
 				data: {
 					accountId: self.accountId,
 					phoneNumber: encodeURIComponent(phone_number),
@@ -473,8 +413,8 @@ define(function(require){
 			var self = this;
 
 			//TODO flag request Check to avoid multiple creation
-			monster.request({
-				resource: 'pbxsManager.create',
+			self.callApi({
+				resource: 'numbers.create',
 				data: {
 					accountId: self.accountId,
 					phoneNumber: encodeURIComponent(phone_number),
@@ -497,8 +437,8 @@ define(function(require){
 			var self = this;
 
 			//TODO flag request Check to avoid multiple creation
-			monster.request({
-				resource: 'pbxsManager.activate',
+			self.callApi({
+				resource: 'numbers.activate',
 				data: {
 					accountId: self.accountId,
 					phoneNumber: encodeURIComponent(phone_number),
@@ -520,8 +460,8 @@ define(function(require){
 		deleteNumber: function(phone_number, success, error) {
 			var self = this;
 
-			monster.request({
-				resource: 'pbxsManager.delete',
+			self.callApi({
+				resource: 'numbers.delete',
 				data: {
 					accountId: self.accountId,
 					phoneNumber: encodeURIComponent(phone_number)
@@ -534,28 +474,6 @@ define(function(require){
 				error: function(data, status) {
 					if(typeof error == 'function') {
 						error(data, status);
-					}
-				}
-			});
-		},
-
-		searchNumbers: function(data, success, error) {
-			var self = this;
-
-			monster.request({
-				resource: 'pbxsManager.search',
-				data: {
-					prefix: data.prefix,
-					quantity: data.quantity || 15
-				},
-				success: function(_data, status) {
-					if(typeof success == 'function') {
-						success(_data, status);
-					}
-				},
-				error: function(_data, status) {
-					if(typeof error == 'function') {
-						error(_data, status);
 					}
 				}
 			});
@@ -645,8 +563,8 @@ define(function(require){
 
 			self.normalizeData(data);
 
-			monster.request({
-				resource: 'oldTrunkstore.update',
+			self.callApi({
+				resource: 'connectivity.update',
 				data: {
 					accountId: self.accountId,
 					connectivityId: self.connectivityId,
