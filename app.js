@@ -704,7 +704,7 @@ define(function(require){
 				step = parseInt(step),
 				error_message = self.i18n.active().please_correct;
 
-			var form_data = form2object('endpoint');
+			var form_data = monster.ui.getFormData('endpoint');
 
 			if(validated) {
 				if(step === 1) {
@@ -751,7 +751,7 @@ define(function(require){
 				current_automatic_step = 1,
 				pause_polling = false,
 				submit_wizard_callback = function() {
-					var form_data = form2object('endpoint');
+					var form_data = monster.ui.getFormData('endpoint');
 
 					form_data.auth.auth_method = $('input[type="radio"][name="auth.auth_method"]:checked', endpointHtml).val(),
 					form_data.server_type = $('.pbx-brand-list .pbx.selected', endpointHtml).data('pbx_name'),
