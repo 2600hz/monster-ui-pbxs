@@ -1181,12 +1181,7 @@ define(function(require){
 							var array_DIDs = [];
 
 							$selected_numbers.each(function() {
-								dataPhoneNumber = $(this).data('phone_number'),
-								phone_number = dataPhoneNumber.match(/^\+?1?([2-9]\d{9})$/);
-
-								if(phone_number[1]) {
-									array_DIDs.push('+1' + phone_number[1]);
-								}
+								array_DIDs.push($(this).data('phone_number'));
 							});
 
 							self.getAccount(function(_globalData) {
