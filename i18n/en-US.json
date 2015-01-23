@@ -81,7 +81,6 @@
 	"help_automatic_step_2": "This test takes 120 seconds - please be patient!",
 	"current_testing": "Testing...",
 	"phone_call_settings": "Phone Call Settings",
-	"can_make_outbound": "Can make an outbound call via 2600hz",
 	"passes_audio_twoway": "Passes Audio Two-Ways",
 	"shows_correct_caller_id": "Shows correct Caller-ID",
 	"pbxs_responds": "PBX responds to inbound calls",
