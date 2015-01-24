@@ -208,6 +208,9 @@ define(function(require){
 				resource: 'numbers.list',
 				data: {
 					accountId: self.accountId,
+					filters: {
+						paginate: 'false'
+					}
 				},
 				success: function(data, status) {
 					if(typeof success == 'function') {
@@ -229,6 +232,9 @@ define(function(require){
 				resource: 'callflow.list',
 				data: {
 					accountId: self.accountId,
+					filters: {
+						paginate: 'false'
+					}
 				},
 				success: function(data, status) {
 					if(typeof success == 'function') {
@@ -257,8 +263,8 @@ define(function(require){
 							credits: {
 								prepay: '0.00'
 							},
-							trunks: '0',
-							inbound_trunks: '0',
+							trunks: 0,
+							inbound_trunks: 0,
 							auth_realm: _data.data.realm
 						},
 						billing_account_id: self.accountId,
@@ -571,6 +577,8 @@ define(function(require){
 					data: data
 				},
 				success: function(_data, status) {
+					toastr.success(self.i18n.active().changesSaved);
+
 					if(typeof success == 'function') {
 						success(_data, status);
 					}
@@ -766,7 +774,7 @@ define(function(require){
 					});
 				},
 				cfg = {},
-				dataTemplate = _.extend({ i18n: { supportEmail: endpointData.extra.support_email }}, endpointData),
+				dataTemplate = endpointData,
 				endpointHtml = $(monster.template(self, 'endpoint', dataTemplate));
 
 			$('.icon-question-sign[data-toggle="tooltip"]', endpointHtml).tooltip();

@@ -15,7 +15,7 @@
 	"failover": "Numéro de rechange",
 
 	"which_pbx": "Sélectionnez votre PBX",
-	"pbx_missing_help": "Votre PBX n'apparaît pas dans la liste? Faites-le nous savoir en contactant {{supportEmail}} !",
+	"pbx_missing_help": "Votre PBX n'apparaît pas dans la liste? Sélectionnez Cisco et continuez normalement",
 	"no_pbx_selected": "Vous n'avez pas sélectionné de PBX",
 	"friendly_name": "Nom de ce PBX",
 
