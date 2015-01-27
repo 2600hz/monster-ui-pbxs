@@ -15,7 +15,7 @@
 	"failover": "Numéro de rechange",
 
 	"which_pbx": "Sélectionnez votre PBX",
-	"pbx_missing_help": "Votre PBX n'apparaît pas dans la liste? Faites-le nous savoir en contactant {{supportEmail}} !",
+	"pbx_missing_help": "Votre PBX n'apparaît pas dans la liste? Sélectionnez Cisco et continuez normalement",
 	"no_pbx_selected": "Vous n'avez pas sélectionné de PBX",
 	"friendly_name": "Nom de ce PBX",
 
@@ -76,7 +76,6 @@
 	"help_automatic_step_2": "Ce test peut prendre jusqu'à 120 seconds!",
 	"current_testing": "Tests en cours...",
 	"phone_call_settings": "Réglages des appels téléphoniques",
-	"can_make_outbound": "Peut appeler vers l'exterieur via 2600hz",
 	"passes_audio_twoway": "Le son circule dans les deux sens",
 	"shows_correct_caller_id": "Montre le bon Caller-ID",
 	"pbxs_responds": "le PBX répond aux appels internes",

@@ -15,7 +15,7 @@
 	"please_correct": "Please correct the following errors:",
 
 	"which_pbx": "Which PBX system do you own?",
-	"pbx_missing_help": "Note: if you don't see your PBX, choose Cisco as your manufacturer and notify {{supportEmail}}",
+	"pbx_missing_help": "Note: if you don't see your PBX, choose Cisco as your manufacturer",
 	"no_pbx_selected": "You didn't select any PBX",
 	"friendly_name": "Name thix PBX",
 
@@ -81,7 +81,6 @@
 	"help_automatic_step_2": "This test takes 120 seconds - please be patient!",
 	"current_testing": "Testing...",
 	"phone_call_settings": "Phone Call Settings",
-	"can_make_outbound": "Can make an outbound call via 2600hz",
 	"passes_audio_twoway": "Passes Audio Two-Ways",
 	"shows_correct_caller_id": "Shows correct Caller-ID",
 	"pbxs_responds": "PBX responds to inbound calls",
@@ -188,5 +187,7 @@
 		"1npan": "1 NPA NXX XXXX@Realm",
 		"username": "SIP_Username@Realm",
 		"npan": "NPA NXX XXXX@Realm"
-	}
+	},
+
+	"changesSaved": "You successfully saved your changes in the PBX Connector!"
 }
