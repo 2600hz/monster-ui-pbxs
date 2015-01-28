@@ -184,10 +184,6 @@
 	position: relative;
 }
 
-#edit_server .wizard-content-step[data-step="2"] .well .row-fluid label.monster-invalid {
-	top: 36px;
-}
-
 #edit_server .wizard-content-step .well .row-fluid input {
 	margin: 5px 0;
 }
