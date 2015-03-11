@@ -1,6 +1,5 @@
 {
 	"name": "pbxs",
-	"source_url": "http://webdev/monster-modules/pbxs",
 	"i18n": {
 		"en-US": {
 			"label": "PBX Connector",
