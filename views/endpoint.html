@@ -176,8 +176,10 @@
 											<label>{{ i18n.compatibilityMode.title }}</label>
 										</div>
 										<div class="span8 offset1">
-											<div class="switch" data-on="success" data-off="" data-on-label="{{ i18n.compatibilityMode.enabled }}" data-off-label="{{ i18n.compatibilityMode.disabled }}">
-												<input class="not-pretty" type="checkbox" name="extra.compatibilityMode"{{#compare options.media_handling "===" "process"}} checked{{/compare}}></input>
+											<div class="switch">
+											{{#monsterSwitch}}
+												<input type="checkbox" name="extra.compatibilityMode"{{#compare options.media_handling "===" "process"}} data-on="{{ i18n.enabled }}" data-off="{{ i18n.disabled }}" checked{{/compare}}>
+											{{/monsterSwitch}}
 											</div>
 										</div>
 									</div>

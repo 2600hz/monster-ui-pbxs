@@ -176,9 +176,7 @@
 	"add": "Add",
 
 	"compatibilityMode": {
-		"title": "Compatibity Mode",
-		"enabled": "Enabled",
-		"disabled": "Disabled"
+		"title": "Compatibity Mode"
 	},
 
 	"inboundFormat": {

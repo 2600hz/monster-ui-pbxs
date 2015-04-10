@@ -862,7 +862,6 @@ define(function(require){
 				$('#list_pbxs_navbar', parent).hide();
 			}
 
-			endpointHtml.find('.switch').bootstrapSwitch()
 			monster.ui.protectField(endpointHtml.find('#auth_password'), endpointHtml);
 			monster.ui.validate(endpointHtml.find('#endpoint'), {
 				rules: {
