@@ -940,6 +940,8 @@ define(function(require){
 
 			searchResults.hide();
 
+			setTimeout(function() { pbxsManager.find('.search-query').focus(); });
+
 			pbxsManager.find('.search-query').on('keyup', function() {
 				var input = $(this),
 					rows = numbersWrapper.find('.number-wrapper'),
