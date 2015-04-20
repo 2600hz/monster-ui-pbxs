@@ -696,7 +696,7 @@
 	float: left;
 	margin-right: 20px;
 	margin-top: -1px;
-	width: 268px;
+	width: 100%;
 }
 
 #monster-content #pbx_connector_container .dropdown-toggle {
@@ -821,7 +821,7 @@
 	}
 
 	#monster-content #pbx_connector_container .numbers-wrapper div.number-wrapper {
-		width: 418px;
+		width: 409px;
 	}
 }
 
@@ -831,7 +831,7 @@
 	}
 
 	#monster-content #pbx_connector_container .numbers-wrapper div.number-wrapper {
-		width: 368px;
+		width: 359px;
 	}
 
 	#monster-content #pbx_connector_container .numbers-wrapper div.number-wrapper:nth-of-type(3) {
