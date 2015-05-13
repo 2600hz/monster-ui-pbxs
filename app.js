@@ -777,7 +777,7 @@ define(function(require){
 				dataTemplate = endpointData,
 				endpointHtml = $(monster.template(self, 'endpoint', dataTemplate));
 
-			$('.icon-question-sign[data-toggle="tooltip"]', endpointHtml).tooltip();
+			monster.ui.tooltips(endpointHtml);
 
 			$.each(endpointData.cfg, function(k, v) {
 				if(typeof v === 'object') {
@@ -1255,7 +1255,7 @@ define(function(require){
 			var self = this,
 				serverId;
 
-			parent.find('[data-toggle="tooltip"]').tooltip();
+			monster.ui.tooltips(parent);
 
 			parent.find('.link-box.assign').on('click', function() {
 				var numbersData = [];
