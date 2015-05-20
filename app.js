@@ -1105,7 +1105,7 @@ define(function(require){
 									if(failoverCell.find('.features i.icon-thumbs-down').size() === 0) {
 										failoverCell
 											.find('.features')
-											.append('<i class="icon-green icon-thumbs-down"></i>')
+											.append('<i class="monster-green icon-thumbs-down"></i>')
 									}
 								}
 								else {
@@ -1134,7 +1134,7 @@ define(function(require){
 									if(cnamCell.find('.features i.icon-user').size() === 0) {
 										cnamCell
 											.find('.features')
-											.append('<i class="icon-green icon-user"></i>')
+											.append('<i class="monster-green icon-user"></i>')
 									}
 								}
 								else {
@@ -1163,7 +1163,7 @@ define(function(require){
 									if(e911Cell.find('.features i.icon-ambulance').size() === 0) {
 										e911Cell
 											.find('.features')
-											.append('<i class="icon-green icon-ambulance"></i>')
+											.append('<i class="monster-green icon-ambulance"></i>')
 									}
 								}
 								else {
