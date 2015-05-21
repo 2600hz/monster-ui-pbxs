@@ -1102,15 +1102,15 @@ define(function(require){
 						callbacks: {
 							success: function(data) {
 								if('failover' in data.data) {
-									if(failoverCell.find('.features i.icon-thumbs-down').size() === 0) {
+									if(failoverCell.find('.features i.fa-thumbs-down').size() === 0) {
 										failoverCell
 											.find('.features')
-											.append('<i class="monster-green icon-thumbs-down"></i>')
+											.append('<i class="fa fa-thumbs-down monster-green"></i>')
 									}
 								}
 								else {
 									failoverCell
-										.find('.features i.icon-thumbs-down')
+										.find('.features i.fa-thumbs-down')
 										.remove()
 								}
 							}
@@ -1131,15 +1131,15 @@ define(function(require){
 						callbacks: {
 							success: function(data) {
 								if(!($.isEmptyObject(data.data.cnam))) {
-									if(cnamCell.find('.features i.icon-user').size() === 0) {
+									if(cnamCell.find('.features i.fa-user').size() === 0) {
 										cnamCell
 											.find('.features')
-											.append('<i class="monster-green icon-user"></i>')
+											.append('<i class=fa fa-user "monster-green"></i>')
 									}
 								}
 								else {
 									cnamCell
-										.find('.features i.icon-user')
+										.find('.features i.fa-user')
 										.remove()
 								}
 							}
@@ -1160,15 +1160,15 @@ define(function(require){
 						callbacks: {
 							success: function(data) {
 								if(!($.isEmptyObject(data.data.dash_e911))) {
-									if(e911Cell.find('.features i.icon-ambulance').size() === 0) {
+									if(e911Cell.find('.features i.fa-ambulance').size() === 0) {
 										e911Cell
 											.find('.features')
-											.append('<i class="monster-green icon-ambulance"></i>')
+											.append('<i class="fa fa-ambulance monster-green"></i>')
 									}
 								}
 								else {
 									e911Cell
-										.find('.features i.icon-ambulance')
+										.find('.features i.fa-ambulance')
 										.remove()
 								}
 							}

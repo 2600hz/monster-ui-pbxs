@@ -377,7 +377,7 @@
 	margin-right: 0;
 }
 
-#monster-content #list_pbxs_navbar #unassigned_numbers #unassigned_numbers_header i.icon-chevron-down {
+#monster-content #list_pbxs_navbar #unassigned_numbers #unassigned_numbers_header i.fa-chevron-down {
 	display: none;
 }
 
@@ -387,11 +387,11 @@
 	margin-right: 15px;
 }
 
-#monster-content #list_pbxs_navbar #unassigned_numbers #unassigned_numbers_header.open i.icon-chevron-down {
+#monster-content #list_pbxs_navbar #unassigned_numbers #unassigned_numbers_header.open i.fa-chevron-down {
 	display: block;
 }
 
-#monster-content #list_pbxs_navbar #unassigned_numbers #unassigned_numbers_header.open i.icon-chevron-up {
+#monster-content #list_pbxs_navbar #unassigned_numbers #unassigned_numbers_header.open i.fa-chevron-up {
 	display: none;
 }
 
