@@ -4,7 +4,7 @@
 			<div class="steps-wrapper">
 				<div class="step active" data-step="1">
 					<div class="wrapper-icon">
-						<i class="icon-check"></i>
+						<i class="fa fa-check-square-o"></i>
 					</div>
 					<div class="step-title">
 						{{ i18n.pbx_brand }}
@@ -12,7 +12,7 @@
 				</div>
 				<div class="step" data-step="2">
 					<div class="wrapper-icon">
-						<i class="icon-hdd"></i>
+						<i class="fa fa-hdd-o"></i>
 					</div>
 					<div class="step-title">
 						{{ i18n.authentication }}
@@ -83,7 +83,7 @@
 						<div class="row-fluid">
 							<div class="content-centered title-step">
 								<h4>
-									<i class="icon-question-sign" data-toggle="tooltip" data-placement="top" data-original-title="{{ i18n.help_static_ip }}"></i>
+									<i class="fa fa-question-circle" data-toggle="tooltip" data-placement="top" data-original-title="{{ i18n.help_static_ip }}"></i>
 									{{ i18n.is_static_ip }}
 									<div class="radio-wrapper">
 										<label class="radio inline">
@@ -189,7 +189,7 @@
 											<label>{{ i18n.phone_calls }}</label>
 										</div>
 										<div class="span8 offset1">
-											<i class="icon-question-sign" data-toggle="tooltip" data-placement="left" data-original-title="{{ i18n.help_caller_id }}"></i>
+											<i class="fa fa-question-circle" data-toggle="tooltip" data-placement="left" data-original-title="{{ i18n.help_caller_id }}"></i>
 											<label for="register_time">{{ i18n.caller_id_header }}</label>
 											<div class="btn-group" data-type="caller_id_header">
 												<button class="btn" data-value="p-asserted">{{ i18n.p_asserted_option }}</button>
@@ -213,12 +213,12 @@
 											<label>{{ i18n.firewall }}</label>
 										</div>
 										<div class="span4 offset1">
-											<i class="icon-question-sign" data-toggle="tooltip" data-placement="left" data-original-title="{{ i18n.help_register_time }}"></i>
+											<i class="fa fa-question-circle" data-toggle="tooltip" data-placement="left" data-original-title="{{ i18n.help_register_time }}"></i>
 											<label for="register_time">{{ i18n.register_time }}</label>
 											<input required type="text" name="cfg.register_time" placeholder="360" pattern="^[0-9]+$" value="{{cfg.register_time}}"></input>
 										</div>
 										<div class="span4">
-											<i class="icon-question-sign" data-toggle="tooltip" data-placement="left" data-original-title="{{ i18n.help_options_ping }}"></i>
+											<i class="fa fa-question-circle" data-toggle="tooltip" data-placement="left" data-original-title="{{ i18n.help_options_ping }}"></i>
 											<label>{{ i18n.opening_pings }}</label>
 											<div class="btn-group" data-type="opening_pings">
 												<button class="btn" data-value="true">{{ i18n.yes }}</button>
@@ -232,7 +232,7 @@
 											<label>{{ i18n.phone_calls }}</label>
 										</div>
 										<div class="span8 offset1">
-											<i class="icon-question-sign" data-toggle="tooltip" data-placement="left" data-original-title="{{ i18n.help_caller_id }}"></i>
+											<i class="fa fa-question-circle" data-toggle="tooltip" data-placement="left" data-original-title="{{ i18n.help_caller_id }}"></i>
 											<label for="register_time">{{ i18n.caller_id_header }}</label>
 											<div class="btn-group" data-type="caller_id_header">
 												<button class="btn" data-value="p-asserted">{{ i18n.p_asserted_option }}</button>
@@ -247,7 +247,7 @@
 											<label>{{ i18n.hd_audio_video }}</label>
 										</div>
 										<div class="span8 offset1">
-											<i class="icon-question-sign" data-toggle="tooltip" data-placement="left" data-original-title="{{ i18n.help_supported_codecs }}"></i>
+											<i class="fa fa-question-circle" data-toggle="tooltip" data-placement="left" data-original-title="{{ i18n.help_supported_codecs }}"></i>
 											<label for="register_time">{{ i18n.supported_codecs }}</label>
 											<div class="btn-group" data-type="supported_codecs" data-select="multi">
 												<button class="btn" data-value="g722">{{ i18n.g722 }}</button>
@@ -263,7 +263,7 @@
 											<label>{{ i18n.dtmf }}</label>
 										</div>
 										<div class="span8 offset1">
-											<i class="icon-question-sign" data-toggle="tooltip" data-placement="left" data-original-title="{{ i18n.help_dtmf }}"></i>
+											<i class="fa fa-question-circle" data-toggle="tooltip" data-placement="left" data-original-title="{{ i18n.help_dtmf }}"></i>
 											<label for="register_time">{{ i18n.signaling_type }}</label>
 											<div class="btn-group" data-type="signaling_type">
 												<button class="btn" data-value="rfc_2833">{{ i18n.rfc_2833 }}</button>
@@ -277,7 +277,7 @@
 											<label>{{ i18n.call_transfer }}</label>
 										</div>
 										<div class="span8 offset1">
-											<i class="icon-question-sign" data-toggle="tooltip" data-placement="left" data-original-title="{{ i18n.help_call_transfer }}"></i>
+											<i class="fa fa-question-circle" data-toggle="tooltip" data-placement="left" data-original-title="{{ i18n.help_call_transfer }}"></i>
 											<label for="register_time">{{ i18n.allow_refer }}</label>
 											<div class="btn-group" data-type="allow_refer">
 												<button class="btn" data-value="true">{{ i18n.yes }}</button>
@@ -291,7 +291,7 @@
 											<label>{{ i18n.faxing }}</label>
 										</div>
 										<div class="span8 offset1">
-											<i class="icon-question-sign" data-toggle="tooltip" data-placement="left" data-original-title="{{ i18n.help_faxing }}"></i>
+											<i class="fa fa-question-circle" data-toggle="tooltip" data-placement="left" data-original-title="{{ i18n.help_faxing }}"></i>
 											<label for="register_time">{{ i18n.use_t38 }}</label>
 											<div class="btn-group" data-type="use_t38">
 												<button class="btn" data-value="true">{{ i18n.yes }}</button>
@@ -311,10 +311,10 @@
 					</div>
 
 					<div class="wizard-buttons">
-						<button type="button" class="cancel btn btn-danger pull-left"><i class="icon-double-angle-left"></i>{{ i18n.cancel }}</button>
-						<button type="button" class="prev-step btn btn-primary pull-left"><i class="icon-double-angle-left"></i>{{ i18n.previous }}</button>
-						<button type="button" class="submit-btn btn btn-success"><i class="icon-ok"></i>{{ i18n.submit }}</button>
-						<button type="button" class="next-step btn btn-primary">{{ i18n.next }}<i class="icon-double-angle-right"></i></button>
+						<button type="button" class="cancel btn btn-danger pull-left"><i class="fa fa-angle-double-left"></i>{{ i18n.cancel }}</button>
+						<button type="button" class="prev-step btn btn-primary pull-left"><i class="fa fa-angle-double-left"></i>{{ i18n.previous }}</button>
+						<button type="button" class="submit-btn btn btn-success"><i class="fa fa-check"></i>{{ i18n.submit }}</button>
+						<button type="button" class="next-step btn btn-primary">{{ i18n.next }}<i class="fa fa-angle-double-right"></i></button>
 					</div>
 				</div>
 			</div>

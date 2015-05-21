@@ -11,7 +11,7 @@
 							<li class="settings-pbx-link" data-step="2"><a href="#"><i class="icon-signal"></i>{{ i18n.authentication }}</a></li>
 							<li class="settings-pbx-link" data-step="3"><a href="#"><i class="icon-wrench"></i>{{ i18n.testing }}</a></li>
 							<li class="divider"></li>
-							<li><a id="delete_pbx" href="#"><i class="icon-trash"></i>{{ i18n.delete_pbx }}</a></li>
+							<li><a id="delete_pbx" href="#"><i class="fa fa-trash-o"></i>{{ i18n.delete_pbx }}</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -23,10 +23,10 @@
 			<label>{{ i18n.numbersLabel }}</label>
 			<label id="count_phones"></label>
 			<span id="trigger_links" class="nav-bar">
-				<a href="#" id="remove_numbers" class="action-number"><i class="icon-remove monster-red"></i><span class="action-text">{{ i18n.remove }}</span></a>
+				<a href="#" id="remove_numbers" class="action-number"><i class="fa fa-times monster-red"></i><span class="action-text">{{ i18n.remove }}</span></a>
 
 				<li class="dropdown dropdown-move">
-					<a href="#" id="move_numbers" role="button" class="action-number dropdown-toggle" data-toggle="dropdown"><i class="icon-share-alt monster-orange"></i><span class="action-text">{{ i18n.move }}</span></a>
+					<a href="#" id="move_numbers" role="button" class="action-number dropdown-toggle" data-toggle="dropdown"><i class="fa fa-share monster-orange"></i><span class="action-text">{{ i18n.move }}</span></a>
 					<ul class="dropdown-menu">
 						{{#each servers_list}}
 							<li class="pbx-dropdown" data-index="{{index}}"><a href="#"><img width="45" height="32" src="apps/pbxs/style/static/images/endpoints/{{img_link}}.png" class="img_style"/>{{server_name}}</a></li>
