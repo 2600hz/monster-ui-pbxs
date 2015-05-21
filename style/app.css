@@ -687,9 +687,11 @@
 	border: 1px solid #ccc;
 	border-bottom-width: 0px;
 	float: left;
-	margin-right: 20px;
+	margin-right: 2%;
 	margin-top: -1px;
 	width: 100%;
+	box-sizing: border-box;
+	height: 60px;
 }
 
 #monster-content #pbx_connector_container .dropdown-toggle {
@@ -769,27 +771,11 @@
 	#monster-content #pbx_connector_container {
 		width: 292px; /* 1 columns of 300px + padding and borders */
 	}
-
-	#monster-content #pbx_connector_container .numbers-wrapper div.number-wrapper:nth-of-type(2), #monster-content #pbx_connector_container .numbers-wrapper div.number-wrapper:nth-last-of-type(2) {
-		border-radius: 0;
-	}
-
-	#monster-content #pbx_connector_container .numbers-wrapper div.number-wrapper {
-		margin-right: 0;
-	}
-
-	#monster-content #pbx_connector_container .numbers-wrapper div.number-wrapper .flag {
-		display: none;
-	}
 }
 
 @media (min-width: 663px) and (max-width: 962px) {
 	#monster-content #pbx_connector_container {
-		width: 582px; /* 2 columns of 300px + padding and borders */
-	}
-
-	#monster-content #pbx_connector_container .numbers-wrapper div.number-wrapper .flag {
-		display: none;
+		width: 582px;
 	}
 }
 
@@ -806,6 +792,18 @@
 		margin: 10px 0 20px;
 		width: 100%;
 	}
+
+	#monster-content #pbx_connector_container .numbers-wrapper div.number-wrapper:nth-of-type(2), #monster-content #pbx_connector_container .numbers-wrapper div.number-wrapper:nth-last-of-type(2) {
+		border-radius: 0;
+	}
+
+	#monster-content #pbx_connector_container .numbers-wrapper div.number-wrapper {
+		margin-right: 0;
+	}
+
+	#monster-content #pbx_connector_container .numbers-wrapper div.number-wrapper .flag {
+		display: none;
+	}
 }
 
 @media (min-width: 963px) and (max-width: 1262px) {
@@ -814,7 +812,7 @@
 	}
 
 	#monster-content #pbx_connector_container .numbers-wrapper div.number-wrapper {
-		width: 409px;
+		width: 49%;
 	}
 }
 
@@ -824,7 +822,7 @@
 	}
 
 	#monster-content #pbx_connector_container .numbers-wrapper div.number-wrapper {
-		width: 359px;
+		width: 32%;
 	}
 
 	#monster-content #pbx_connector_container .numbers-wrapper div.number-wrapper:nth-of-type(3) {
@@ -840,7 +838,7 @@
 	}
 
 	#monster-content #pbx_connector_container .numbers-wrapper div.number-wrapper:nth-of-type(2n+0) {
-		margin-right: 20px;
+		margin-right: 2%;
 	}
 
 	#monster-content #pbx_connector_container .numbers-wrapper div.number-wrapper:nth-of-type(3n+0) {
