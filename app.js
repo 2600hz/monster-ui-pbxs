@@ -913,6 +913,7 @@ define(function(require){
 			endpointData.img_link = img_link;
 
 			endpointData.servers_list = [];
+			endpointData.hidePort = monster.config.whitelabel.hasOwnProperty('hide_port') ? monster.config.whitelabel.hide_port : false;
 
 			$.each(data.data.servers, function(k, v) {
 				if(k !== serverId) {

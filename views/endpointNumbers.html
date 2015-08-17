@@ -46,8 +46,9 @@
 					</ul>
 				</li>
 			</ul>
-			<a href="#" id="port_numbers" class="action-number"><i class="fa fa-random monster-blue"></i><span class="action-text">{{ i18n.portLabel }}</span></a>
-
+			{{#unless hidePort}}
+				<a href="#" id="port_numbers" class="action-number"><i class="fa fa-random monster-blue"></i><span class="action-text">{{ i18n.portLabel }}</span></a>
+			{{/unless}}
 			<span class="search-box pull-right">
 				<i class="fa fa-search"></i>
 				<input type="text" class="search-query" placeholder="{{ i18n.search }}..."></input>
