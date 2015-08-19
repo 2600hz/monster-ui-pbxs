@@ -122,7 +122,10 @@ define(function(require){
 							var savedId = (args.id === 0 || args.id) ? args.id : _data.data.servers.length-1;
 
 							self.renderList(savedId, parent, function() {
-								self.renderPbxsManager(_data, $.extend(true, defaults, _data.data.servers[savedId]), target, callbacks);
+								var defaultsCopy = $.extend(true, {}, defaults),
+									endpointData = $.extend(true, defaultsCopy, _data.data.servers[savedId]);
+
+								self.renderPbxsManager(_data, endpointData, target, callbacks);
 							}, _data.data.servers);
 						},
 
@@ -147,7 +150,7 @@ define(function(require){
 
 						afterRender: _callbacks.afterRender
 					},
-					defaults = $.extend(true, {
+					defaults = {
 						auth: {
 							auth_user: 'user_' + monster.util.randomString(8),
 							auth_password: monster.util.randomString(12),
@@ -173,7 +176,7 @@ define(function(require){
 							realm: results.realm,
 							id: args.id || (args.id === 0 ? 0 : 'new')
 						}
-					}, args.data_defaults || {});
+					};
 
 				if(results.account.data.servers) {
 					$.each(results.account.data.servers, function(k, server) {
@@ -516,8 +519,13 @@ define(function(require){
 			self.cleanFormData(endpointData);
 
 			if(endpointData.server_name) {
-				if((index || index === 0) && index != 'new') {
+				if((index || index === 0) && index !== 'new') {
 					$.extend(true, new_data.servers[index], endpointData);
+
+					// if codecs weren't set on the new endpoint, or if the compatibility mode was not set, delete codecs key
+					if(endpointData.options.media_handling === 'bypass' || !endpointData.options.hasOwnProperty('codecs') || endpointData.options.codecs.length === 0) {
+						delete new_data.servers[index].options.codecs;
+					}
 				}
 				else {
 					new_data.servers.push($.extend(true, {
@@ -569,7 +577,6 @@ define(function(require){
 			var self = this;
 
 			self.normalizeData(data);
-
 			self.callApi({
 				resource: 'connectivity.update',
 				data: {
@@ -766,6 +773,13 @@ define(function(require){
 					form_data.server_type = $('.pbx-brand-list .pbx.selected', endpointHtml).data('pbx_name'),
 					form_data.cfg = $.extend(true, cfg, form_data.cfg);
 
+					if(form_data.extra.compatibilityMode) {
+						var codecsToSave = audioCodecs.getSelectedItems();
+						if(codecsToSave.length) {
+							form_data.options.codecs = codecsToSave;
+						}
+					}
+
 					self.getAccount(function(globalData) {
 						self.saveEndpoint(form_data, globalData, function(_data) {
 							if(typeof callbacks.saveSuccess == 'function') {
@@ -779,6 +793,8 @@ define(function(require){
 				endpointHtml = $(monster.template(self, 'endpoint', dataTemplate));
 
 			monster.ui.tooltips(endpointHtml);
+
+			var audioCodecs = monster.ui.codecSelector('audio', endpointHtml.find('#compatibility_codec_selector'), endpointData.options.codecs || []);
 
 			$.each(endpointData.cfg, function(k, v) {
 				if(typeof v === 'object') {
@@ -795,6 +811,12 @@ define(function(require){
 
 			$('.static-ip-block', endpointHtml).hide();
 			$('.static-ip-block[data-value="'+ endpointData.auth.auth_method +'"]', endpointHtml).show();
+
+			endpointHtml.find('[name="extra.compatibilityMode"]').on('change', function(val) {
+				var codecSelector = endpointHtml.find('#compatibility_codec_selector');
+
+				$(this).is(':checked') ? codecSelector.addClass('active') : codecSelector.removeClass('active');
+			});
 
 			$('.btn-group .btn', endpointHtml).on('click', function(ev) {
 				ev.preventDefault();
