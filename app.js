@@ -919,7 +919,10 @@ define(function(require){
 				numberWrapper.append(monster.template(self, 'noNumbers'));
 			}
 			else {
-				numberWrapper.append(monster.template(self, 'listNumbers', { DIDs: arrayNumbers }));
+				numberWrapper.append(monster.template(self, 'listNumbers', {
+					isE911Enabled: monster.util.isNumberFeatureEnabled('e911'),
+					DIDs: arrayNumbers
+				}));
 			}
 
 			$('#count_phones', parent).html(arrayNumbers.length);
@@ -994,7 +997,13 @@ define(function(require){
 					});
 
 					if(matches.length > 0) {
-						searchResults.append(monster.template(self, 'searchResults', _.extend({ i18n: { amountNumbers: matches.length }}, {matches: matches})));
+						searchResults.append(monster.template(self, 'searchResults', {
+							isE911Enabled: monster.util.isNumberFeatureEnabled('e911'),
+							matches: matches,
+							i18n: {
+								amountNumbers: matches.length
+							}
+						}));
 					}
 					else {
 						searchResults.append(monster.template(self, 'noResults'));
@@ -1174,34 +1183,36 @@ define(function(require){
 				}
 			});
 
-			pbxsManager.on('click', '.e911-number', function() {
-				var e911Cell = $(this).parents('.number-wrapper').first(),
-					phoneNumber = e911Cell.data('phone_number');
+			if (monster.util.isNumberFeatureEnabled('e911')) {
+				pbxsManager.on('click', '.e911-number', function() {
+					var e911Cell = $(this).parents('.number-wrapper').first(),
+						phoneNumber = e911Cell.data('phone_number');
 
-				if(phoneNumber) {
-					var args = {
-						phoneNumber: phoneNumber,
-						callbacks: {
-							success: function(data) {
-								if(!($.isEmptyObject(data.data.dash_e911))) {
-									if(e911Cell.find('.features i.fa-ambulance').size() === 0) {
+					if(phoneNumber) {
+						var args = {
+							phoneNumber: phoneNumber,
+							callbacks: {
+								success: function(data) {
+									if(!($.isEmptyObject(data.data.dash_e911))) {
+										if(e911Cell.find('.features i.fa-ambulance').size() === 0) {
+											e911Cell
+												.find('.features')
+												.append('<i class="fa fa-ambulance monster-green"></i>')
+										}
+									}
+									else {
 										e911Cell
-											.find('.features')
-											.append('<i class="fa fa-ambulance monster-green"></i>')
+											.find('.features i.fa-ambulance')
+											.remove()
 									}
 								}
-								else {
-									e911Cell
-										.find('.features i.fa-ambulance')
-										.remove()
-								}
 							}
-						}
-					};
+						};
 
-					monster.pub('common.e911.renderPopup', args);
-				}
-			});
+						monster.pub('common.e911.renderPopup', args);
+					}
+				});
+			}
 
 			pbxsManager.find('#remove_numbers').on('click', function() {
 				var dataPhoneNumber,
