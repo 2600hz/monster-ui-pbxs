@@ -920,6 +920,7 @@ define(function(require){
 			}
 			else {
 				numberWrapper.append(monster.template(self, 'listNumbers', {
+					isCnamEnabled: monster.util.isNumberFeatureEnabled('cnam'),
 					isE911Enabled: monster.util.isNumberFeatureEnabled('e911'),
 					DIDs: arrayNumbers
 				}));
@@ -998,6 +999,7 @@ define(function(require){
 
 					if(matches.length > 0) {
 						searchResults.append(monster.template(self, 'searchResults', {
+							isCnamEnabled: monster.util.isNumberFeatureEnabled('cnam'),
 							isE911Enabled: monster.util.isNumberFeatureEnabled('e911'),
 							matches: matches,
 							i18n: {
@@ -1154,34 +1156,36 @@ define(function(require){
 				}
 			});
 
-			pbxsManager.on('click', '.cnam-number', function() {
-				var cnamCell = $(this).parents('.number-wrapper').first(),
-					phoneNumber = cnamCell.data('phone_number');
+			if (monster.util.isNumberFeatureEnabled('cnam')) {
+				pbxsManager.on('click', '.cnam-number', function() {
+					var cnamCell = $(this).parents('.number-wrapper').first(),
+						phoneNumber = cnamCell.data('phone_number');
 
-				if(phoneNumber) {
-					var args = {
-						phoneNumber: phoneNumber,
-						callbacks: {
-							success: function(data) {
-								if(!($.isEmptyObject(data.data.cnam))) {
-									if(cnamCell.find('.features i.fa-user').size() === 0) {
+					if(phoneNumber) {
+						var args = {
+							phoneNumber: phoneNumber,
+							callbacks: {
+								success: function(data) {
+									if(!($.isEmptyObject(data.data.cnam))) {
+										if(cnamCell.find('.features i.fa-user').size() === 0) {
+											cnamCell
+												.find('.features')
+												.append('<i class=fa fa-user "monster-green"></i>')
+										}
+									}
+									else {
 										cnamCell
-											.find('.features')
-											.append('<i class=fa fa-user "monster-green"></i>')
+											.find('.features i.fa-user')
+											.remove()
 									}
 								}
-								else {
-									cnamCell
-										.find('.features i.fa-user')
-										.remove()
-								}
 							}
-						}
-					};
+						};
 
-					monster.pub('common.callerId.renderPopup', args);
-				}
-			});
+						monster.pub('common.callerId.renderPopup', args);
+					}
+				});
+			}
 
 			if (monster.util.isNumberFeatureEnabled('e911')) {
 				pbxsManager.on('click', '.e911-number', function() {
