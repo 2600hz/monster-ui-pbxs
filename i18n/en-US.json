@@ -17,7 +17,7 @@
 	"which_pbx": "Which PBX system do you own?",
 	"pbx_missing_help": "Note: if you don't see your PBX, choose Cisco as your manufacturer",
 	"no_pbx_selected": "You didn't select any PBX",
-	"friendly_name": "Name thix PBX",
+	"friendly_name": "Name this PBX",
 
 	"cancel": "Cancel",
 	"previous": "Previous",
