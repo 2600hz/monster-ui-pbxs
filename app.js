@@ -1558,7 +1558,7 @@ define(function(require){
 				//Build available numbers list
 				if('numbers' in results.listNumbers) {
 					$.each(results.listNumbers.numbers, function(k, v) {
-						if(!v.used_by) {
+						if(!v.used_by || v.used_by === '') {
 							tabData.push({
 								phoneNumber: k,
 								isoCountry: 'locality' in v ? (v.locality.country || '') : ''
