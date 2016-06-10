@@ -350,7 +350,7 @@
 *************************************************************************************************************************************************/
 
 /* Unassigned Numbers */
-#monster-content #list_pbxs_navbar #unassigned_numbers {
+.core-content #list_pbxs_navbar #unassigned_numbers {
 	color: #333;
 	display: none;
 	position: absolute;
@@ -359,7 +359,7 @@
 	width: 270px;
 }
 
-#monster-content #list_pbxs_navbar #unassigned_numbers #unassigned_numbers_header {
+.core-content #list_pbxs_navbar #unassigned_numbers #unassigned_numbers_header {
 	background-color:#22a5ff;
 	border-radius: 4px 4px 0 0;
 	color: #eee;
@@ -372,51 +372,51 @@
 	padding: 0 10px;
 }
 
-#monster-content #list_pbxs_navbar #unassigned_numbers #unassigned_numbers_header > *:not(i) {
+.core-content #list_pbxs_navbar #unassigned_numbers #unassigned_numbers_header > *:not(i) {
 	margin: 0 5px;
 }
 
-#monster-content #list_pbxs_navbar #unassigned_numbers #unassigned_numbers_header i {
+.core-content #list_pbxs_navbar #unassigned_numbers #unassigned_numbers_header i {
 	line-height: 38px;
 }
 
-#monster-content #list_pbxs_navbar #unassigned_numbers #unassigned_numbers_header  {
+.core-content #list_pbxs_navbar #unassigned_numbers #unassigned_numbers_header  {
 	float: right;
 	margin-right: 0;
 }
 
-#monster-content #list_pbxs_navbar #unassigned_numbers #unassigned_numbers_header i.fa-chevron-down {
+.core-content #list_pbxs_navbar #unassigned_numbers #unassigned_numbers_header i.fa-chevron-down {
 	display: none;
 }
 
-#monster-content #list_pbxs_navbar #unassigned_numbers #unassigned_numbers_header #unassigned_numbers_count {
+.core-content #list_pbxs_navbar #unassigned_numbers #unassigned_numbers_header #unassigned_numbers_count {
 	font-size: 18px;
 	line-height: 40px;
 	margin-right: 15px;
 }
 
-#monster-content #list_pbxs_navbar #unassigned_numbers #unassigned_numbers_header.open i.fa-chevron-down {
+.core-content #list_pbxs_navbar #unassigned_numbers #unassigned_numbers_header.open i.fa-chevron-down {
 	display: block;
 }
 
-#monster-content #list_pbxs_navbar #unassigned_numbers #unassigned_numbers_header.open i.fa-chevron-up {
+.core-content #list_pbxs_navbar #unassigned_numbers #unassigned_numbers_header.open i.fa-chevron-up {
 	display: none;
 }
 
-#monster-content #list_pbxs_navbar #unassigned_numbers .content{
+.core-content #list_pbxs_navbar #unassigned_numbers .content{
 	background: #f9f9f9;
 	border-left: 1px solid #ccc;
 	border-right: 1px solid #ccc;
 	display: none;
 }
 
-#monster-content #list_pbxs_navbar #unassigned_numbers .content .search-box {
+.core-content #list_pbxs_navbar #unassigned_numbers .content .search-box {
 	border-bottom: 1px solid #ccc;
 	padding: 10px;
 	text-align: center;
 }
 
-#monster-content #list_pbxs_navbar #unassigned_numbers .content #empty_search {
+.core-content #list_pbxs_navbar #unassigned_numbers .content #empty_search {
 	border-bottom: 1px solid #CCCCCC;
 	border-top: 1px solid #FFFFFF;
 	display: none;
@@ -426,7 +426,7 @@
 	text-align: center;
 }
 
-#monster-content #list_pbxs_navbar #unassigned_numbers .content #unassigned_actions {
+.core-content #list_pbxs_navbar #unassigned_numbers .content #unassigned_actions {
 	border-top: 1px solid #fff;
 	border-bottom: 1px solid #ccc;
 
@@ -434,7 +434,7 @@
 	line-height: 50px;
 }
 
-#monster-content #list_pbxs_navbar #unassigned_numbers .content #unassigned_actions > * {
+.core-content #list_pbxs_navbar #unassigned_numbers .content #unassigned_actions > * {
 	border-right: 1px solid #ccc;
 	border-left: 1px solid #fff;
 	cursor: pointer;
@@ -443,79 +443,79 @@
 	width: 50%;
 }
 
-#monster-content #list_pbxs_navbar #unassigned_numbers .content #unassigned_actions a{
+.core-content #list_pbxs_navbar #unassigned_numbers .content #unassigned_actions a{
 	text-align: left;
 }
 
-#monster-content #list_pbxs_navbar #unassigned_numbers .content #unassigned_actions > *:last-child {
+.core-content #list_pbxs_navbar #unassigned_numbers .content #unassigned_actions > *:last-child {
 	border-right: 0px;
 }
 
-#monster-content #list_pbxs_navbar #unassigned_numbers .content #unassigned_actions > *:first-child {
+.core-content #list_pbxs_navbar #unassigned_numbers .content #unassigned_actions > *:first-child {
 	border-left: 0px;
 }
 
-#monster-content #list_pbxs_navbar #unassigned_numbers .content #unassigned_actions .link-box {
+.core-content #list_pbxs_navbar #unassigned_numbers .content #unassigned_actions .link-box {
 	float: left;
 }
 
-#monster-content #list_pbxs_navbar #unassigned_numbers .content #unassigned_actions .link-box i {
+.core-content #list_pbxs_navbar #unassigned_numbers .content #unassigned_actions .link-box i {
 	margin: 0 10px;
 }
 
 /* TODO Responsive height*/
-#monster-content #list_pbxs_navbar #unassigned_numbers .content #unassigned_numbers_wrapper {
+.core-content #list_pbxs_navbar #unassigned_numbers .content #unassigned_numbers_wrapper {
 	max-height: 500px;
 	overflow-y: auto;
 }
 
-#monster-content #list_pbxs_navbar #unassigned_numbers .content #unassigned_numbers_wrapper .unassigned-number {
+.core-content #list_pbxs_navbar #unassigned_numbers .content #unassigned_numbers_wrapper .unassigned-number {
 	border-bottom: 1px solid #ccc;
 	border-top: 1px solid #fff;
 }
 
 
-#monster-content #list_pbxs_navbar #unassigned_numbers .content #unassigned_numbers_wrapper .unassigned-number .phone-number {
+.core-content #list_pbxs_navbar #unassigned_numbers .content #unassigned_numbers_wrapper .unassigned-number .phone-number {
 	display: inline-block;
 	width: 150px;
 }
 
-#monster-content #list_pbxs_navbar #unassigned_numbers .content #unassigned_numbers_wrapper .unassigned-number input[type="checkbox"] {
+.core-content #list_pbxs_navbar #unassigned_numbers .content #unassigned_numbers_wrapper .unassigned-number input[type="checkbox"] {
 	margin: 0 10px 0 0;
 }
 
-#monster-content #list_pbxs_navbar #unassigned_numbers .content #unassigned_numbers_wrapper .no-number {
+.core-content #list_pbxs_navbar #unassigned_numbers .content #unassigned_numbers_wrapper .no-number {
 	line-height: 50px;
 	padding: 5px 10px;
 	text-align: center;
 }
 
-#monster-content #list_pbxs_navbar #pbxs_manager_listpanel {
+.core-content #list_pbxs_navbar #pbxs_manager_listpanel {
 	overflow-x: auto;
 	overflow-y: hidden;
 	white-space: nowrap;
 }
 
-#monster-content #list_pbxs_navbar .pbx-wrapper {
+.core-content #list_pbxs_navbar .pbx-wrapper {
 	display: inline-block;
 	height: 87px;
 	margin-right: 15px;
 	text-align: center;
 	width: 115px;
-	margin-top: -20px
+	margin-top: -20px;
 }
 
-#monster-content #list_pbxs_navbar .pbx-wrapper .pbx-name {
+.core-content #list_pbxs_navbar .pbx-wrapper .pbx-name {
 	color: #eee;
 	margin-top: 10px;
 	overflow: hidden;
 }
 
-#monster-content #list_pbxs_navbar .pbx-wrapper:hover .pbx-name, #monster-content #list_pbxs_navbar .pbx-wrapper.selected .pbx-name{
+.core-content #list_pbxs_navbar .pbx-wrapper:hover .pbx-name, .core-content #list_pbxs_navbar .pbx-wrapper.selected .pbx-name{
 	color: #22a5ff;
 }
 
-#monster-content #list_pbxs_navbar .pbx-wrapper .img-wrapper {
+.core-content #list_pbxs_navbar .pbx-wrapper .img-wrapper {
 	background: #fff;
 	border: 3px solid #333;
 	border-radius: 4px;
@@ -526,14 +526,14 @@
 	margin: auto;
 	opacity: 0.9;
 	width: 76px;
-	z-index: 3
+	z-index: 3;
 }
 
-#monster-content #list_pbxs_navbar #add_pbx .img-wrapper {
+.core-content #list_pbxs_navbar #add_pbx .img-wrapper {
 	line-height: 42px;
 }
 
-#monster-content #list_pbxs_navbar .pbx-wrapper:hover .img-wrapper{
+.core-content #list_pbxs_navbar .pbx-wrapper:hover .img-wrapper{
 	border: 3px solid #22a5ff;
 	color: #22a5ff;
 	cursor: pointer;
@@ -541,14 +541,14 @@
 	opacity: 1;
 }
 
-#monster-content #list_pbxs_navbar .pbx-wrapper.selected .img-wrapper{
+.core-content #list_pbxs_navbar .pbx-wrapper.selected .img-wrapper{
 	border: 3px solid #22a5ff;
 	color: #22a5ff;
 	font-weight: 600;
 }
 
 
-#monster-content .notif-phones {
+.core-content .notif-phones {
 	background: #22a5ff;
 	border-radius:50%;
 	width:23px;
@@ -566,121 +566,122 @@
 
 }
 
-#monster-content #list_pbxs_navbar #add_pbx {
+.core-content #list_pbxs_navbar #add_pbx {
 	cursor: pointer;
 	float: right;
 	margin: 0px 5px auto 10px;
 }
 
-#monster-content #list_pbxs_navbar #add_pbx .plus-btn{
-	margin-top: 10px
+.core-content #list_pbxs_navbar #add_pbx .plus-btn{
+	margin-top: 10px;
 }
 
-#monster-content #list_pbxs_navbar #add_pbx:hover .plus-btn {
+.core-content #list_pbxs_navbar #add_pbx:hover .plus-btn {
 	background-position: 0px 25px;
 }
 
-#monster-content #pbx_connector_container {
-	margin: 20px auto 160px;
+.core-content #pbx_connector_container {
+	margin: 0 auto 160px;
+	padding-top: 20px;
 	width: 902px; /* 3 columns of 300px + padding and borders */
 	display: block;
 }
 
-#monster-content #pbx_connector_container .pbx-title{
+.core-content #pbx_connector_container .pbx-title{
 	margin: 0;
 }
 
-#monster-content #pbx_connector_container .pbx-title .img-style {
+.core-content #pbx_connector_container .pbx-title .img-style {
 	box-shadow: 1px 1px 5px #ccc;
 	margin: 15px;
 }
 
-#monster-content #pbx_connector_container .pbx-title .dropdown-toggle i {
+.core-content #pbx_connector_container .pbx-title .dropdown-toggle i {
 	font-size: 26px;
 }
 
-#monster-content #pbx_connector_container .pbx-title .dropdown-toggle {
+.core-content #pbx_connector_container .pbx-title .dropdown-toggle {
 	padding: 27.5px 15px 0;
 }
 
-#monster-content #pbx_connector_container .dropdown-menu{
+.core-content #pbx_connector_container .dropdown-menu{
 	font-size: 16px;
 }
 
-#monster-content #pbx_connector_container .dropdown-menu i {
+.core-content #pbx_connector_container .dropdown-menu i {
 	margin-right: 10px;
 }
 
-#monster-content #pbx_connector_container .dropdown-menu .pbx-dropdown.empty {
+.core-content #pbx_connector_container .dropdown-menu .pbx-dropdown.empty {
 	padding: 5px;
 }
 
-#monster-content #pbx_connector_container #actions_wrapper {
+.core-content #pbx_connector_container #actions_wrapper {
 	margin: 30px 0 0 0;
 	line-height: 40px;
 }
 
-#monster-content #pbx_connector_container #actions_wrapper #count_phones {
+.core-content #pbx_connector_container #actions_wrapper #count_phones {
 	color: #22a5ff;
 	font-size: 18px;
 	margin: 0 25px 0px 3px;
 }
 
-#monster-content #pbx_connector_container #actions_wrapper #trigger_links {
+.core-content #pbx_connector_container #actions_wrapper #trigger_links {
 	display: none;
 }
 
-#monster-content #pbx_connector_container #actions_wrapper label{
+.core-content #pbx_connector_container #actions_wrapper label{
 	font-size: 16px;
 	font-weight: 600;
 }
 
-#monster-content #pbx_connector_container #actions_wrapper a.action-number {
+.core-content #pbx_connector_container #actions_wrapper a.action-number {
 	margin-right: 20px;
 	color: #666666;
 	white-space: nowrap;
 	text-decoration: none !important;
 }
 
-#monster-content #pbx_connector_container #actions_wrapper .buy-numbers-dropdown {
+.core-content #pbx_connector_container #actions_wrapper .buy-numbers-dropdown {
 	margin: 0;
 	display: inline-block;
 }
 
-#monster-content #pbx_connector_container #actions_wrapper .buy-numbers-dropdown .dropdown-menu {
+.core-content #pbx_connector_container #actions_wrapper .buy-numbers-dropdown .dropdown-menu {
 	min-width: 0;
 }
 
-#monster-content #pbx_connector_container #actions_wrapper a.action-number:hover .action-text {
+.core-content #pbx_connector_container #actions_wrapper a.action-number:hover .action-text {
 	text-decoration: underline;
 }
 
-#monster-content #pbx_connector_container #actions_wrapper a i{
+.core-content #pbx_connector_container #actions_wrapper a i{
 	margin-right: 5px;
 }
 
-#monster-content #pbx_connector_container #actions_wrapper .dropdown-move {
+.core-content #pbx_connector_container #actions_wrapper .dropdown-move {
 	list-style: none;
 	display: inline-block;
 	margin-right: 20px;
 }
 
-#monster-content #pbx_connector_container #actions_wrapper .dropdown-move img {
+.core-content #pbx_connector_container #actions_wrapper .dropdown-move img {
 	margin-right: 10px;
 }
 
-#monster-content #pbx_connector_container #actions_wrapper .dropdown-move a {
+.core-content #pbx_connector_container #actions_wrapper .dropdown-move a {
 	margin-right: 0;
 	line-height: 32px;
 }
 
-#monster-content #pbx_connector_container .numbers-wrapper{
+.core-content #pbx_connector_container .numbers-wrapper{
 	margin: 0 0 15px 0px;
 	display: inline-block;
 	width: 100%;
 }
 
-#monster-content #list_pbxs_navbar .link-box:hover  {
+.core-content #list_pbxs_navbar .link-box:hover  {
 	background: rgb(240,240,240); /* Old browsers */
 	background: -moz-linear-gradient(top,  rgba(240,240,240,1) 0%, rgba(249,249,249,1) 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(240,240,240,1)), color-stop(100%,rgba(249,249,249,1))); /* Chrome,Safari4+ */
@@ -691,7 +692,7 @@
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f0f0', endColorstr='#f9f9f9',GradientType=0 ); /* IE6-9 */
 }
 
-#monster-content #pbx_connector_container .numbers-wrapper div.number-wrapper {
+.core-content #pbx_connector_container .numbers-wrapper div.number-wrapper {
 	border: 1px solid #ccc;
 	border-bottom-width: 0px;
 	float: left;
@@ -702,15 +703,15 @@
 	height: 60px;
 }
 
-#monster-content #pbx_connector_container .dropdown-toggle {
+.core-content #pbx_connector_container .dropdown-toggle {
 	background: transparent;
 }
 
-#monster-content #pbx_connector_container .dropdown-toggle i:hover {
+.core-content #pbx_connector_container .dropdown-toggle i:hover {
 	color: #333;
 }
 
-#monster-content #pbx_connector_container .no-number {
+.core-content #pbx_connector_container .no-number {
 	background: #f9f9f9;
 
 	border-radius: 4px;
@@ -720,155 +721,155 @@
 	text-align: center;
 }
 
-#monster-content #pbx_connector_container .numbers-wrapper div.number-wrapper:nth-of-type(1) {
+.core-content #pbx_connector_container .numbers-wrapper div.number-wrapper:nth-of-type(1) {
 	border-top-left-radius: 5px !important;
 	border-top-right-radius: 5px !important;
 }
 
-#monster-content #pbx_connector_container .numbers-wrapper div.number-wrapper:nth-of-type(2) {
+.core-content #pbx_connector_container .numbers-wrapper div.number-wrapper:nth-of-type(2) {
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
 }
 
-#monster-content #pbx_connector_container .numbers-wrapper div.number-wrapper:nth-last-of-type(1) {
+.core-content #pbx_connector_container .numbers-wrapper div.number-wrapper:nth-last-of-type(1) {
 		border-bottom-left-radius: 5px !important;
 		border-bottom-right-radius: 5px !important;
 
 		border-bottom-width: 1px;
 }
 
-#monster-content #pbx_connector_container .numbers-wrapper div.number-wrapper:nth-last-of-type(2) {
+.core-content #pbx_connector_container .numbers-wrapper div.number-wrapper:nth-last-of-type(2) {
 		border-bottom-left-radius: 5px;
 		border-bottom-right-radius: 5px;
 
 		border-bottom-width: 1px;
 }
 
-#monster-content #pbx_connector_container .numbers-wrapper div.number-wrapper:nth-of-type(2n+0) {
+.core-content #pbx_connector_container .numbers-wrapper div.number-wrapper:nth-of-type(2n+0) {
 	margin-right: 0;
 }
 
-#monster-content #pbx_connector_container .numbers-wrapper div.number-wrapper .number-options {
+.core-content #pbx_connector_container .numbers-wrapper div.number-wrapper .number-options {
 	margin-top: 3px;
 }
 
-#monster-content #pbx_connector_container .numbers-wrapper div.number-wrapper .features {
+.core-content #pbx_connector_container .numbers-wrapper div.number-wrapper .features {
 	cursor: default;
 }
 
-#monster-content #pbx_connector_container .numbers-wrapper div.number-wrapper .features i{
+.core-content #pbx_connector_container .numbers-wrapper div.number-wrapper .features i{
 	margin-left: 10px;
 }
 
-#monster-content #pbx_connector_container .numbers-wrapper div.number-wrapper input[type="checkbox"] {
+.core-content #pbx_connector_container .numbers-wrapper div.number-wrapper input[type="checkbox"] {
 	margin: -2px 4px 0 4px;
 }
 
-#monster-content #pbx_connector_container .numbers-wrapper div.number-wrapper .phone-number {
+.core-content #pbx_connector_container .numbers-wrapper div.number-wrapper .phone-number {
 	margin-left: 4px;
 	display: inline-block;
 	width: 135px;
 }
 
-#monster-content #pbx_connector_container #search_results #count_result {
+.core-content #pbx_connector_container #search_results #count_result {
 	margin-bottom: 10px;
 }
 
 /* Responsive Design Specifics */
 @media (max-width: 662px) {
-	#monster-content #pbx_connector_container {
+	.core-content #pbx_connector_container {
 		width: 292px; /* 1 columns of 300px + padding and borders */
 	}
 }
 
 @media (min-width: 663px) and (max-width: 962px) {
-	#monster-content #pbx_connector_container {
+	.core-content #pbx_connector_container {
 		width: 582px;
 	}
 }
 
 @media (max-width: 962px) {
-	#monster-content #pbx_connector_container .no-number {
+	.core-content #pbx_connector_container .no-number {
 		line-height: 25px;
 	}
 
-	#monster-content #pbx_connector_container #search_results {
+	.core-content #pbx_connector_container #search_results {
 		margin-top: 50px;
 	}
 
-	#monster-content #pbx_connector_container .search-box {
+	.core-content #pbx_connector_container .search-box {
 		margin: 10px 0 20px;
 		width: 100%;
 	}
 
-	#monster-content #pbx_connector_container .numbers-wrapper div.number-wrapper:nth-of-type(2), #monster-content #pbx_connector_container .numbers-wrapper div.number-wrapper:nth-last-of-type(2) {
+	.core-content #pbx_connector_container .numbers-wrapper div.number-wrapper:nth-of-type(2), .core-content #pbx_connector_container .numbers-wrapper div.number-wrapper:nth-last-of-type(2) {
 		border-radius: 0;
 	}
 
-	#monster-content #pbx_connector_container .numbers-wrapper div.number-wrapper {
+	.core-content #pbx_connector_container .numbers-wrapper div.number-wrapper {
 		margin-right: 0;
 	}
 
-	#monster-content #pbx_connector_container .numbers-wrapper div.number-wrapper .flag {
+	.core-content #pbx_connector_container .numbers-wrapper div.number-wrapper .flag {
 		display: none;
 	}
 }
 
 @media (min-width: 963px) and (max-width: 1262px) {
-	#monster-content #pbx_connector_container {
+	.core-content #pbx_connector_container {
 		width: 882px; /* 2 columns of 408px + padding and borders */
 	}
 
-	#monster-content #pbx_connector_container .numbers-wrapper div.number-wrapper {
+	.core-content #pbx_connector_container .numbers-wrapper div.number-wrapper {
 		width: 49%;
 	}
 }
 
 @media (min-width: 1263px) {
-	#monster-content #pbx_connector_container {
+	.core-content #pbx_connector_container {
 		width: 1182px; /* 3 columns of 368px + padding and borders */
 	}
 
-	#monster-content #pbx_connector_container .numbers-wrapper div.number-wrapper {
+	.core-content #pbx_connector_container .numbers-wrapper div.number-wrapper {
 		width: 32%;
 	}
 
-	#monster-content #pbx_connector_container .numbers-wrapper div.number-wrapper:nth-of-type(3) {
+	.core-content #pbx_connector_container .numbers-wrapper div.number-wrapper:nth-of-type(3) {
 		border-top-left-radius: 5px;
 		border-top-right-radius: 5px;
 	}
 
-	#monster-content #pbx_connector_container .numbers-wrapper div.number-wrapper:nth-last-of-type(3) {
+	.core-content #pbx_connector_container .numbers-wrapper div.number-wrapper:nth-last-of-type(3) {
 		border-bottom-left-radius: 5px;
 		border-bottom-right-radius: 5px;
 
 		border-bottom-width: 1px;
 	}
 
-	#monster-content #pbx_connector_container .numbers-wrapper div.number-wrapper:nth-of-type(2n+0) {
+	.core-content #pbx_connector_container .numbers-wrapper div.number-wrapper:nth-of-type(2n+0) {
 		margin-right: 2%;
 	}
 
-	#monster-content #pbx_connector_container .numbers-wrapper div.number-wrapper:nth-of-type(3n+0) {
+	.core-content #pbx_connector_container .numbers-wrapper div.number-wrapper:nth-of-type(3n+0) {
 		margin-right: 0;
 	}
 }
 
 /* Responsive Height */
 @media (min-height: 680px) and (max-height: 880px) {
-	#monster-content #list_pbxs_navbar #unassigned_numbers .content #unassigned_numbers_wrapper {
+	.core-content #list_pbxs_navbar #unassigned_numbers .content #unassigned_numbers_wrapper {
 		max-height: 350px;
 	}
 }
 
 @media (min-height: 580px) and (max-height: 679px) {
-	#monster-content #list_pbxs_navbar #unassigned_numbers .content #unassigned_numbers_wrapper {
+	.core-content #list_pbxs_navbar #unassigned_numbers .content #unassigned_numbers_wrapper {
 		max-height: 250px;
 	}
 }
 
 @media (max-height: 579px) {
-	#monster-content #list_pbxs_navbar #unassigned_numbers .content #unassigned_numbers_wrapper {
+	.core-content #list_pbxs_navbar #unassigned_numbers .content #unassigned_numbers_wrapper {
 		max-height: 150px;
 	}
 }
