@@ -272,6 +272,7 @@ define(function(require){
 							auth_realm: _data.data.realm
 						},
 						billing_account_id: self.accountId,
+						name: _data.data.name,
 						DIDs_Unassigned: {},
 						servers: []
 					};
