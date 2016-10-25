@@ -125,6 +125,8 @@ define(function(require){
 								var defaultsCopy = $.extend(true, {}, defaults),
 									endpointData = $.extend(true, defaultsCopy, _data.data.servers[savedId]);
 
+								endpointData.extra.id = savedId;
+
 								self.renderPbxsManager(_data, endpointData, target, callbacks);
 							}, _data.data.servers);
 						},
@@ -135,15 +137,6 @@ define(function(require){
 							target.empty();
 
 							 self.renderList();
-						},
-
-						cancelSuccess: _callbacks.cancelSuccess || function() {
-							monster.pub('pbxsManager.edit', {
-								id: args.id,
-								parent: parent,
-								target: target,
-								callbacks: callbacks
-							});
 						},
 
 						deleteError: _callbacks.deleteError,
@@ -521,11 +514,6 @@ define(function(require){
 			if(endpointData.server_name) {
 				if((index || index === 0) && index !== 'new') {
 					$.extend(true, new_data.servers[index], endpointData);
-
-					// if codecs weren't set on the new endpoint, or if the compatibility mode was not set, delete codecs key
-					if(endpointData.options.media_handling === 'bypass' || !endpointData.options.hasOwnProperty('codecs') || endpointData.options.codecs.length === 0) {
-						delete new_data.servers[index].options.codecs;
-					}
 				}
 				else {
 					new_data.servers.push($.extend(true, {
@@ -545,12 +533,32 @@ define(function(require){
 							monitor_enabled: false
 						}
 					}, endpointData));
+
+					index = new_data.servers.length - 1;
 				}
+
+				self.cleanBeforeUpdate(new_data.servers[index], endpointData);
 
 				self.updateOldTrunkstore(new_data, success, error);
 			}
 			else {
 				monster.ui.alert('formatting_error');
+			}
+		},
+
+		cleanBeforeUpdate: function(serverData, endpointData) {
+			var self = this;
+			// if codecs weren't set on the new endpoint, or if the compatibility mode was not set, delete codecs key
+			if(endpointData.options.media_handling === 'bypass' || !endpointData.options.hasOwnProperty('codecs') || endpointData.options.codecs.length === 0) {
+				delete serverData.options.codecs;
+			}
+
+			if(endpointData.auth.auth_method !== 'IP') {
+				delete serverData.auth.ip;
+			}
+			else {
+				delete serverData.auth.auth_password;
+				delete serverData.auth.auth_user;
 			}
 		},
 
@@ -599,7 +607,9 @@ define(function(require){
 			});
 		},
 
-		loadSpecificStep: function(step_index, callbacks, parent) {
+		loadSpecificStep: function(data, parent) {
+			var step_index = data.load_step;
+
 			$('.wizard-top-bar', parent).hide();
 			$('.wizard-content-step', parent).hide();
 			$('.wizard-content-step[data-step="'+ step_index +'"]', parent).show();
@@ -614,9 +624,7 @@ define(function(require){
 								.on('click', function(ev) {
 				ev.preventDefault();
 
-				if(typeof callbacks.cancelSuccess === 'function') {
-					callbacks.cancelSuccess();
-				}
+				monster.pub('pbxsManager.edit', { id: data.extra.id || 0});
 			});
 		},
 
@@ -879,7 +887,7 @@ define(function(require){
 			});
 
 			if(endpointData.load_step && endpointData.load_step > 0) {
-				self.loadSpecificStep(endpointData.load_step, callbacks, endpointHtml);
+				self.loadSpecificStep(endpointData, endpointHtml);
 			}
 			else {
 				$('#list_pbxs_navbar', parent).hide();
