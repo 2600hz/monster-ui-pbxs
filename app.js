@@ -1010,9 +1010,7 @@ define(function(require){
 							isCnamEnabled: monster.util.isNumberFeatureEnabled('cnam'),
 							isE911Enabled: monster.util.isNumberFeatureEnabled('e911'),
 							matches: matches,
-							i18n: {
-								amountNumbers: matches.length
-							}
+							amountNumbers: matches.length
 						}));
 					}
 					else {
@@ -1097,6 +1095,7 @@ define(function(require){
 				ev.preventDefault();
 
 				var list_numbers = [];
+
 				pbxsManager.find('.number-wrapper.selected').each(function() {
 					list_numbers.push($(this).data('phone_number'));
 				});
