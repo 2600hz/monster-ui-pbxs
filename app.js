@@ -910,9 +910,25 @@ define(function(require){
 		refreshListNumbers: function(didsList, _parent) {
 			var parent = _parent || $('#pbx_connector_container'),
 				self = this,
-				numberWrapper = parent.find('#numbers_wrapper');
+				numberWrapper = parent.find('#numbers_wrapper'),
+				clearSearch = function clearSearch() {
+					parent
+						.find('.number-wrapper')
+							.show();
+					parent
+						.find('.search-query')
+							.val('');
+					parent
+						.find('#search_results')
+							.empty()
+								.hide();
+				};
 
-			numberWrapper.empty();
+			clearSearch();
+
+			numberWrapper
+				.empty()
+					.show();
 
 			var arrayNumbers = [];
 
@@ -1096,9 +1112,16 @@ define(function(require){
 
 				var list_numbers = [];
 
-				pbxsManager.find('.number-wrapper.selected').each(function() {
-					list_numbers.push($(this).data('phone_number'));
-				});
+				pbxsManager
+					.find('.number-wrapper.selected')
+						.each(function(idx, el) {
+							var $el = $(el),
+								phoneNumber = $el.data('phone_number');
+
+							if (list_numbers.indexOf(phoneNumber) < 0) {
+								list_numbers.push($el.data('phone_number'));
+							}
+						});
 
 				if(list_numbers.length > 0) {
 					var newIndex = $(this).data('index');
