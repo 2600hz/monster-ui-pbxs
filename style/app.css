@@ -670,14 +670,23 @@
 }
 
 .core-content #pbx_connector_container #actions_wrapper .dropdown-move a {
-	margin-right: 0;
 	line-height: 32px;
+	overflow: hidden;
+	margin-right: 0;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 
 .core-content #pbx_connector_container .numbers-wrapper{
 	margin: 0 0 15px 0px;
 	display: inline-block;
 	width: 100%;
+}
+
+.core-content #pbx_connector_container .numbers-wrapper::after {
+	display: block;
+	content: '';
+	clear:  both;
 }
 
 .core-content #list_pbxs_navbar .link-box:hover  {
