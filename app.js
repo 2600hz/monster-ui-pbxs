@@ -1093,7 +1093,7 @@ define(function(require){
 									globalData.data.servers[serverId].DIDs[key] = {
 										failover: false,
 										cnam: false,
-										dash_e911: false
+										e911: false
 									};
 								});
 
@@ -1227,7 +1227,7 @@ define(function(require){
 							phoneNumber: phoneNumber,
 							callbacks: {
 								success: function(data) {
-									if(!($.isEmptyObject(data.data.dash_e911))) {
+									if(!($.isEmptyObject(data.data.e911))) {
 										if(e911Cell.find('.features i.fa-ambulance').size() === 0) {
 											e911Cell
 												.find('.features')
