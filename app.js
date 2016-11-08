@@ -956,13 +956,7 @@ define(function(require){
 				featuresNumber;
 
 			_.each(arrayNumbers, function(value) {
-				featuresNumber = value.hasOwnProperty('features_available') && value.features_available.length ? value.features_available : [];
-
-				value.extra = value.extra || {};
-
-				value.extra.hasE911 = featuresNumber.indexOf('e911') >= 0 && monster.util.isNumberFeatureEnabled('e911');
-				value.extra.hasFailover = featuresNumber.indexOf('failover') >= 0;
-				value.extra.hasCnam = featuresNumber.indexOf('cnam') >= 0 && monster.util.isNumberFeatureEnabled('cnam');
+				monster.util.populateBooleansNumberFeatures(value);
 				value.extra.hasFeatures = value.extra.hasE911 || value.extra.hasFailover || value.extra.hasCnam;
 			});
 
