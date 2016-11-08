@@ -177,6 +177,7 @@ define(function(require){
 							if(did in results.numbers.data.numbers) {
 								var num = results.numbers.data.numbers[did];
 								results.account.data.servers[k].DIDs[did].features = num.features;
+								results.account.data.servers[k].DIDs[did].features_available = num.features_available;
 								if('locality' in num) {
 									results.account.data.servers[k].DIDs[did].isoCountry = num.locality.country || '';
 								}
@@ -943,15 +944,33 @@ define(function(require){
 				numberWrapper.append(monster.template(self, 'noNumbers'));
 			}
 			else {
+				arrayNumbers = self.formatNumberArrayFeatures(arrayNumbers);
+
 				numberWrapper.append(monster.template(self, 'listNumbers', {
-					isCnamEnabled: monster.util.isNumberFeatureEnabled('cnam'),
-					isE911Enabled: monster.util.isNumberFeatureEnabled('e911'),
 					DIDs: arrayNumbers
 				}));
 			}
 
 			$('#count_phones', parent).html(arrayNumbers.length);
 			$('#trigger_links', parent).hide();
+		},
+
+		formatNumberArrayFeatures: function(arrayNumbers) {
+			var self = this,
+				featuresNumber;
+
+			_.each(arrayNumbers, function(value) {
+				featuresNumber = value.hasOwnProperty('features_available') && value.features_available.length ? value.features_available : [];
+
+				value.extra = value.extra || {};
+
+				value.extra.hasE911 = featuresNumber.indexOf('e911') >= 0 && monster.util.isNumberFeatureEnabled('e911');
+				value.extra.hasFailover = featuresNumber.indexOf('failover') >= 0;
+				value.extra.hasCnam = featuresNumber.indexOf('cnam') >= 0 && monster.util.isNumberFeatureEnabled('cnam');
+				value.extra.hasFeatures = value.extra.hasE911 || value.extra.hasFailover || value.extra.hasCnam;
+			});
+
+			return arrayNumbers;
 		},
 
 		renderPbxsManager: function(data, endpointData, target, callbacks) {
@@ -987,53 +1006,26 @@ define(function(require){
 
 			$('#list_pbxs_navbar').show();
 
-			var searchResults = pbxsManager.find('#search_results'),
-				numbersWrapper = pbxsManager.find('#numbers_wrapper');
-
-			searchResults.hide();
+			var numbersWrapper = pbxsManager.find('#numbers_wrapper');
 
 			setTimeout(function() { pbxsManager.find('.search-query').focus(); });
 
 			pbxsManager.find('.search-query').on('keyup', function() {
 				var input = $(this),
 					rows = numbersWrapper.find('.number-wrapper'),
-					searchString = $.trim(input.val().toLowerCase().replace(/[^0-9]/g, '')),
-					matches = [],
-					cache = {};
-
-				$.each(rows, function(k, v) {
-					var data = $(this).data(),
-						key = data.phone_number;
-
-					cache[key] = $(this);
-				});
+					searchString = $.trim(input.val().toLowerCase());
 
 				if (!searchString) {
-					numbersWrapper.show();
-					searchResults.empty().hide();
+					rows.show();
 				}
 				else {
-					searchResults.show().empty();
+					$.each(rows, function(k, v) {
+						var data = $(this).data(),
+							key = data.search;
+							console.log(key, searchString);
 
-					$.each(cache, function(phone_number, rowArray) {
-						if (phone_number.indexOf(searchString)>-1) {
-							matches.push({phone_number: phone_number, selected: $(rowArray).hasClass('selected')});
-						}
+						key.indexOf(searchString) < 0 ? $(v).hide() : $(v).show();
 					});
-
-					if(matches.length > 0) {
-						searchResults.append(monster.template(self, 'searchResults', {
-							isCnamEnabled: monster.util.isNumberFeatureEnabled('cnam'),
-							isE911Enabled: monster.util.isNumberFeatureEnabled('e911'),
-							matches: matches,
-							amountNumbers: matches.length
-						}));
-					}
-					else {
-						searchResults.append(monster.template(self, 'noResults'));
-					}
-
-					numbersWrapper.hide();
 				}
 			});
 
@@ -1219,6 +1211,7 @@ define(function(require){
 
 			if (monster.util.isNumberFeatureEnabled('e911')) {
 				pbxsManager.on('click', '.e911-number', function() {
+					console.log('click');
 					var e911Cell = $(this).parents('.number-wrapper').first(),
 						phoneNumber = e911Cell.data('phone_number');
 
