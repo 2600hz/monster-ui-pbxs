@@ -919,10 +919,6 @@ define(function(require){
 					parent
 						.find('.search-query')
 							.val('');
-					parent
-						.find('#search_results')
-							.empty()
-								.hide();
 				};
 
 			clearSearch();
@@ -1022,7 +1018,6 @@ define(function(require){
 					$.each(rows, function(k, v) {
 						var data = $(this).data(),
 							key = data.search;
-							console.log(key, searchString);
 
 						key.indexOf(searchString) < 0 ? $(v).hide() : $(v).show();
 					});
@@ -1044,12 +1039,6 @@ define(function(require){
 						currentNumberWrapper = $(this);
 
 					toggleNumberSelected(currentNumberWrapper, !$(event.target).is('input:checkbox'));
-
-					if(currentNumberWrapper.parents('#search_results').size() > 0) {
-						var $wrapper = pbxsManager.find('#numbers_wrapper .number-wrapper[data-phone_number="'+currentNumberWrapper.data('phone_number')+'"]');
-
-						toggleNumberSelected($wrapper, true);
-					}
 
 					var links = pbxsManager.find('#trigger_links');
 
@@ -1104,16 +1093,9 @@ define(function(require){
 
 				var list_numbers = [];
 
-				pbxsManager
-					.find('.number-wrapper.selected')
-						.each(function(idx, el) {
-							var $el = $(el),
-								phoneNumber = $el.data('phone_number');
-
-							if (list_numbers.indexOf(phoneNumber) < 0) {
-								list_numbers.push($el.data('phone_number'));
-							}
-						});
+				pbxsManager.find('.number-wrapper.selected').each(function() {
+					list_numbers.push($(this).data('phone_number'));
+				});
 
 				if(list_numbers.length > 0) {
 					var newIndex = $(this).data('index');
@@ -1211,7 +1193,6 @@ define(function(require){
 
 			if (monster.util.isNumberFeatureEnabled('e911')) {
 				pbxsManager.on('click', '.e911-number', function() {
-					console.log('click');
 					var e911Cell = $(this).parents('.number-wrapper').first(),
 						phoneNumber = e911Cell.data('phone_number');
 
