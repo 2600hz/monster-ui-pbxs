@@ -702,10 +702,10 @@
 
 .core-content #pbx_connector_container .numbers-wrapper div.number-wrapper {
 	border: 1px solid #ccc;
-	border-bottom-width: 0px;
 	float: left;
-	margin-right: 2%;
-	margin-top: -1px;
+	margin-left: 7px;
+	margin-right: 7px;
+	margin-top: 10px;
 	width: 100%;
 	box-sizing: border-box;
 	height: 60px;
@@ -727,34 +727,6 @@
 	line-height: 50px;
 	padding: 5px 10px;
 	text-align: center;
-}
-
-.core-content #pbx_connector_container .numbers-wrapper div.number-wrapper:nth-of-type(1) {
-	border-top-left-radius: 5px !important;
-	border-top-right-radius: 5px !important;
-}
-
-.core-content #pbx_connector_container .numbers-wrapper div.number-wrapper:nth-of-type(2) {
-	border-top-left-radius: 5px;
-	border-top-right-radius: 5px;
-}
-
-.core-content #pbx_connector_container .numbers-wrapper div.number-wrapper:nth-last-of-type(1) {
-		border-bottom-left-radius: 5px !important;
-		border-bottom-right-radius: 5px !important;
-
-		border-bottom-width: 1px;
-}
-
-.core-content #pbx_connector_container .numbers-wrapper div.number-wrapper:nth-last-of-type(2) {
-		border-bottom-left-radius: 5px;
-		border-bottom-right-radius: 5px;
-
-		border-bottom-width: 1px;
-}
-
-.core-content #pbx_connector_container .numbers-wrapper div.number-wrapper:nth-of-type(2n+0) {
-	margin-right: 0;
 }
 
 .core-content #pbx_connector_container .numbers-wrapper div.number-wrapper .number-options {
@@ -810,11 +782,8 @@
 		width: 100%;
 	}
 
-	.core-content #pbx_connector_container .numbers-wrapper div.number-wrapper:nth-of-type(2), .core-content #pbx_connector_container .numbers-wrapper div.number-wrapper:nth-last-of-type(2) {
-		border-radius: 0;
-	}
-
 	.core-content #pbx_connector_container .numbers-wrapper div.number-wrapper {
+		margin-left: 0;
 		margin-right: 0;
 	}
 
@@ -830,6 +799,9 @@
 
 	.core-content #pbx_connector_container .numbers-wrapper div.number-wrapper {
 		width: 49%;
+		margin-left: 4px;
+		margin-right: 4px;
+		margin-top: 10px;
 	}
 }
 
@@ -840,26 +812,6 @@
 
 	.core-content #pbx_connector_container .numbers-wrapper div.number-wrapper {
 		width: 32%;
-	}
-
-	.core-content #pbx_connector_container .numbers-wrapper div.number-wrapper:nth-of-type(3) {
-		border-top-left-radius: 5px;
-		border-top-right-radius: 5px;
-	}
-
-	.core-content #pbx_connector_container .numbers-wrapper div.number-wrapper:nth-last-of-type(3) {
-		border-bottom-left-radius: 5px;
-		border-bottom-right-radius: 5px;
-
-		border-bottom-width: 1px;
-	}
-
-	.core-content #pbx_connector_container .numbers-wrapper div.number-wrapper:nth-of-type(2n+0) {
-		margin-right: 2%;
-	}
-
-	.core-content #pbx_connector_container .numbers-wrapper div.number-wrapper:nth-of-type(3n+0) {
-		margin-right: 0;
 	}
 }
 
