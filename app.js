@@ -629,16 +629,14 @@ define(function(require){
 			});
 		},
 
-		initializeWizard: function(parent, callback_submit) {
+		initializeWizard: function(parent, callback_submit, step) {
 			var self = this,
 				max_step = parseInt($('.wizard-top-bar', parent).attr('data-max_step'));
 
-			$('.wizard-top-bar', parent).attr('data-active_step', '1');
+			$('.wizard-top-bar', parent).attr('data-active_step', step || 1);
 
 			$('.wizard-content-step', parent).hide();
 			$('.wizard-content-step[data-step="1"]', parent).show();
-
-			$('.wizard-top-bar', parent).attr('data-active_step', '1');
 
 			if(max_step !== 1) {
 				$('.submit-btn', parent).hide();
@@ -684,6 +682,7 @@ define(function(require){
 				ev.preventDefault();
 
 				current_step = parseInt($('.wizard-top-bar', parent).attr('data-active_step'));
+
 				self.validate_step(current_step, parent, function() {
 					if(typeof callback_submit === 'function') {
 						callback_submit();
@@ -816,7 +815,7 @@ define(function(require){
 				}
 			});
 
-			self.initializeWizard(endpointHtml, submit_wizard_callback);
+			self.initializeWizard(endpointHtml, submit_wizard_callback, endpointData.load_step);
 
 			$('.static-ip-block', endpointHtml).hide();
 			$('.static-ip-block[data-value="'+ endpointData.auth.auth_method +'"]', endpointHtml).show();
