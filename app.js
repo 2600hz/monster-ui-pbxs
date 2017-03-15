@@ -918,7 +918,7 @@ define(function(require){
 				arrayNumbers.push(details);
 			});
 
-			arrayNumbers = monster.util.sort(arrayNumbers, 'phoneNumber');
+			arrayNumbers = _.sortBy(arrayNumbers, 'phoneNumber');
 
 			if($.isEmptyObject(didsList)) {
 				numberWrapper.append(monster.template(self, 'noNumbers'));
@@ -1162,7 +1162,7 @@ define(function(require){
 			var self = this;
 
 			self.listAvailableNumbers(function(unassignedNumbers) {
-				unassignedNumbers = monster.util.sort(unassignedNumbers, 'phoneNumber');
+				unassignedNumbers = _.sortBy(unassignedNumbers, 'phoneNumber');
 
 				var data = {
 					unassignedNumbers: unassignedNumbers
