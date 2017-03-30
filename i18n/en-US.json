@@ -26,7 +26,7 @@
 	"select_label": "Select",
 
 	"moreHelpSoon": "More configuration options coming soon!",
-	"is_static_ip": "Is your PBX on Static IP?",
+	"is_static_ip": "Do you want to authenticate this PBX with a Static IP (or a Domain Name?)",
 	"yes": "Yes",
 	"no": "No",
 	"np": "No Problem!",
@@ -38,7 +38,7 @@
 	"please_follow_text": " to configure your PBX and allow traffic from the servers listed above. We will send you calls from these IPS.",
 	"help_configuration": " to get help on how to configure the different settings of your PBX",
 	"great": "Great!",
-	"what_is_your_ip": "What is the static IP of this PBX?",
+	"what_is_your_ip": "What is the IP (or domain) of this PBX?",
 	"outbound_servers": "Outbound Servers",
 	"how_to_configure": "How do you want to configure your PBX?",
 	"help_manual_config": "Please tell us what features your PBX supports. Be sure your firewall timeout is set properly.",
