@@ -738,17 +738,6 @@ define(function(require){
 					}
 				}
 				else if(step === 2) {
-					/* IP */
-					if($('input[type="radio"][name="auth.auth_method"]:checked', parent).val() === 'IP') {
-						if(!($('#auth_ip', parent).val().match(/^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/) !== null)) {
-							validated = false;
-							error_message += '<br/>- ' + self.i18n.active().not_valid_ip;
-						}
-					}
-					/* Auth */
-					else {
-
-					}
 				}
 				else if(step === 3) {
 				}
@@ -895,11 +884,7 @@ define(function(require){
 
 			monster.ui.protectField(endpointHtml.find('#auth_password'), endpointHtml);
 			monster.ui.validate(endpointHtml.find('#endpoint'), {
-				rules: {
-					"auth.ip": {
-						"ipv4": true
-					}
-				}
+				rules: {}
 			});
 
 			(target)
