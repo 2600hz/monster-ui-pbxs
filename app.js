@@ -52,7 +52,7 @@ define(function(require){
 		_render: function(container) {
 			var self = this,
 				pbxsManager = $(monster.template(self, 'pbxsManager')),
-				parent = _.isEmpty(container) ? $('#monster-content') : container;
+				parent = _.isEmpty(container) ? $('#monster_content') : container;
 
 			(parent)
 				.empty()
@@ -114,7 +114,7 @@ define(function(require){
 				}
 			},
 			function(err, results){
-				var parent = args.parent || $('#monster-content'),
+				var parent = args.parent || $('#monster_content'),
 					target = args.target || parent.find('#pbxs_manager_view'),
 					_callbacks = args.callbacks || {},
 					callbacks = {
@@ -1153,7 +1153,7 @@ define(function(require){
 				}
 			});
 
-			(target || $('#monster-content'))
+			(target || $('#monster_content'))
 				.empty()
 				.append(pbxsManager);
 		},
@@ -1337,7 +1337,7 @@ define(function(require){
 		renderList: function(_id, _parent, _callback, _data) {
 			var self = this,
 				callback = _callback,
-				parent = _parent || $('#monster-content'),
+				parent = _parent || $('#monster_content'),
 				id = _id || 0,
 				refreshList = function(data) {
 					$('#list_pbxs_navbar', parent).show();
