@@ -1,7 +1,7 @@
 {{#each unassignedNumbers}}
 	<div class="unassigned-number number-box" data-phone_number="{{this.phoneNumber}}">
 		<input type="checkbox"></input>
-		<span class="phone-number">{{formatPhoneNumber this.phoneNumber}}</span>
+		<span class="phone-number">{{#monsterNumberWrapper this.phoneNumber}}{{/monsterNumberWrapper}}</span>
 		{{#if this.isoCountry}}
 			<span class="flag"><img src="css/assets/flags/32/{{ this.isoCountry }}.png" height="32" width="32"></img></span>
 		{{/if}}
