@@ -1,4 +1,4 @@
-define(function(require){
+define(function(require) {
 	var $ = require('jquery'),
 		_ = require('underscore'),
 		monster = require('monster'),
@@ -10,7 +10,7 @@ define(function(require){
 
 		css: [ 'app' ],
 
-		i18n: { 
+		i18n: {
 			'en-US': { customCss: false },
 			'fr-FR': { customCss: false },
 			'ru-RU': { customCss: false },
@@ -22,10 +22,10 @@ define(function(require){
 
 		subscribe: {
 			'pbxsManager.activate': '_render',
-			'pbxsManager.edit': 'editServer',
+			'pbxsManager.edit': 'editServer'
 		},
 
-		load: function(callback){
+		load: function(callback) {
 			var self = this;
 
 			self.initApp(function() {
@@ -42,7 +42,7 @@ define(function(require){
 			});
 		},
 
-		render: function(container){
+		render: function(container) {
 			var self = this;
 
 			self._render(container);
@@ -62,10 +62,9 @@ define(function(require){
 				self.refreshUnassignedList(function() {
 					self.bindEvents(pbxsManager);
 
-					if(data.length === 0) {
+					if (data.length === 0) {
 						monster.pub('pbxsManager.edit', {});
-					}
-					else if(data.length >= 1) {
+					} else if (data.length >= 1) {
 						monster.pub('pbxsManager.edit', { id: 0 });
 
 						pbxsManager.find('.pbx-wrapper[data-id="0"]').addClass('selected');
@@ -74,15 +73,15 @@ define(function(require){
 			});
 
 			pbxsManager.find('#pbxs_manager_listpanel').niceScroll({
-				cursorcolor:"#333",
-				autohidemode:false,
-				cursorborder:"1px solid #666"
+				cursorcolor: '#333',
+				autohidemode: false,
+				cursorborder: '1px solid #666'
 			}).railh.addClass('pbx-fixed-hscroll');
 
 			pbxsManager.find('#unassigned_numbers_wrapper').niceScroll({
-				cursorcolor:"#333",
-				cursoropacitymin:0.5,
-				hidecursordelay:1000
+				cursorcolor: '#333',
+				cursoropacitymin: 0.5,
+				hidecursordelay: 1000
 			}).rail.addClass('unassigned-number-fixed-vscroll');
 		},
 
@@ -90,19 +89,18 @@ define(function(require){
 			var self = this;
 
 			monster.parallel({
-				realm: function(callback){
-					 self.callApi({
+				realm: function(callback) {
+					self.callApi({
 						resource: 'account.get',
 						data: {
-							accountId: self.accountId,
+							accountId: self.accountId
 						},
 						success: function(_data_account, status) {
-
 							callback(null, _data_account.data.realm);
 						}
 					});
 				},
-				account: function(callback){
+				account: function(callback) {
 					self.getAccount(function(_data) {
 						callback(null, _data);
 					});
@@ -113,13 +111,13 @@ define(function(require){
 					});
 				}
 			},
-			function(err, results){
+			function(err, results) {
 				var parent = args.parent || $('#monster_content'),
 					target = args.target || parent.find('#pbxs_manager_view'),
 					_callbacks = args.callbacks || {},
 					callbacks = {
 						saveSuccess: _callbacks.saveSuccess || function(_data) {
-							var savedId = (args.id === 0 || args.id) ? args.id : _data.data.servers.length-1;
+							var savedId = (args.id === 0 || args.id) ? args.id : _data.data.servers.length - 1;
 
 							self.renderList(savedId, parent, function() {
 								var defaultsCopy = $.extend(true, {}, defaults),
@@ -136,7 +134,7 @@ define(function(require){
 						deleteSuccess: _callbacks.deleteSuccess || function() {
 							target.empty();
 
-							 self.renderList();
+							self.renderList();
 						},
 
 						deleteError: _callbacks.deleteError,
@@ -171,14 +169,14 @@ define(function(require){
 						}
 					};
 
-				if(results.account.data.servers) {
+				if (results.account.data.servers) {
 					$.each(results.account.data.servers, function(k, server) {
-						$.each(server.DIDs, function(did, v) {
-							if(did in results.numbers.data.numbers) {
+						$.each(server.DIDs, function(did) {
+							if (did in results.numbers.data.numbers) {
 								var num = results.numbers.data.numbers[did];
 								results.account.data.servers[k].DIDs[did].features = num.features;
 								results.account.data.servers[k].DIDs[did].features_available = num.features_available;
-								if('locality' in num) {
+								if ('locality' in num) {
 									results.account.data.servers[k].DIDs[did].isoCountry = num.locality.country || '';
 								}
 							}
@@ -186,10 +184,9 @@ define(function(require){
 					});
 				}
 
-				if(typeof args === 'object' && (args.id || args.id === 0)) {
+				if (typeof args === 'object' && (args.id || args.id === 0)) {
 					self.renderPbxsManager(results.account, $.extend(true, defaults, results.account.data.servers[args.id]), target, callbacks);
-				}
-				else {
+				} else {
 					self.renderEndpoint(results.accounts, defaults, target, callbacks, parent);
 				}
 			});
@@ -211,12 +208,12 @@ define(function(require){
 					}
 				},
 				success: function(data, status) {
-					if(typeof success == 'function') {
+					if (typeof success === 'function') {
 						success(data, status);
 					}
 				},
 				error: function(data, status) {
-					if(typeof error == 'function') {
+					if (typeof error === 'function') {
 						error(data, status);
 					}
 				}
@@ -235,12 +232,12 @@ define(function(require){
 					}
 				},
 				success: function(data, status) {
-					if(typeof success == 'function') {
+					if (typeof success === 'function') {
 						success(data, status);
 					}
 				},
 				error: function(data, status) {
-					if(typeof error == 'function') {
+					if (typeof error === 'function') {
 						error(data, status);
 					}
 				}
@@ -253,7 +250,7 @@ define(function(require){
 			self.callApi({
 				resource: 'account.get',
 				data: {
-					accountId: self.accountId,
+					accountId: self.accountId
 				},
 				success: function(_data, status) {
 					var account_data = {
@@ -277,12 +274,12 @@ define(function(require){
 							data: account_data
 						},
 						success: function(data, status) {
-							if(typeof success == 'function') {
+							if (typeof success === 'function') {
 								success(data, status);
 							}
 						},
 						error: function(data, status) {
-							if(typeof error == 'function') {
+							if (typeof error === 'function') {
 								error(data, status);
 							}
 						}
@@ -297,15 +294,15 @@ define(function(require){
 			self.callApi({
 				resource: 'connectivity.list',
 				data: {
-					accountId: self.accountId,
+					accountId: self.accountId
 				},
 				success: function(data, status) {
-					if(typeof success == 'function') {
+					if (typeof success === 'function') {
 						success(data, status);
 					}
 				},
 				error: function(data, status) {
-					if(typeof error == 'function') {
+					if (typeof error === 'function') {
 						error(data, status);
 					}
 				}
@@ -322,12 +319,12 @@ define(function(require){
 					connectivityId: self.connectivityId
 				},
 				success: function(data, status) {
-					if(typeof success == 'function') {
+					if (typeof success === 'function') {
 						success(data, status);
 					}
 				},
 				error: function(data, status) {
-					if(typeof error == 'function') {
+					if (typeof error === 'function') {
 						error(data, status);
 					}
 				}
@@ -345,25 +342,22 @@ define(function(require){
 				};
 
 			self.listAccounts(function(data, status) {
-				if(data.data.length) {
+				if (data.data.length) {
 					self.connectivityId = data.data[0];
 
 					getAccount();
-				}
-				else {
+				} else {
 					self.createAccount(function(_data) {
-							self.listAccounts(function(data, status) {
-								self.connectivityId = data.data[0];
+						self.listAccounts(function(data, status) {
+							self.connectivityId = data.data[0];
 
-								getAccount();
-							});
-						},
-						function(_data, status) {
-							var template = monster.template(self, '!' + self.i18n.active().error_signup, { status: status });
+							getAccount();
+						});
+					}, function(_data, status) {
+						var template = monster.template(self, '!' + self.i18n.active().error_signup, { status: status });
 
-							monster.ui.alert(template);
-						}
-					);
+						monster.ui.alert(template);
+					});
 				}
 			});
 		},
@@ -378,12 +372,12 @@ define(function(require){
 					phoneNumber: encodeURIComponent(phone_number)
 				},
 				success: function(_data, status) {
-					if(typeof success === 'function') {
+					if (typeof success === 'function') {
 						success(_data);
 					}
 				},
 				error: function(_data, status) {
-					if(typeof error === 'function') {
+					if (typeof error === 'function') {
 						error(_data);
 					}
 				}
@@ -401,12 +395,12 @@ define(function(require){
 					data: data
 				},
 				success: function(_data, status) {
-					if(typeof success === 'function') {
+					if (typeof success === 'function') {
 						success(_data);
 					}
 				},
 				error: function(_data, status) {
-					if(typeof error === 'function') {
+					if (typeof error === 'function') {
 						error(_data);
 					}
 				}
@@ -425,12 +419,12 @@ define(function(require){
 					data: {}
 				},
 				success: function(_data, status) {
-					if(typeof success == 'function') {
+					if (typeof success === 'function') {
 						success(_data, status);
 					}
 				},
 				error: function(_data, status) {
-					if(typeof error == 'function') {
+					if (typeof error === 'function') {
 						error(_data, status);
 					}
 				}
@@ -449,12 +443,12 @@ define(function(require){
 					data: {}
 				},
 				success: function(_data, status) {
-					if(typeof success == 'function') {
+					if (typeof success === 'function') {
 						success(_data, status);
 					}
 				},
 				error: function(_data, status) {
-					if(typeof error == 'function') {
+					if (typeof error === 'function') {
 						error(_data, status);
 					}
 				}
@@ -471,12 +465,12 @@ define(function(require){
 					phoneNumber: encodeURIComponent(phone_number)
 				},
 				success: function(data, status) {
-					if(typeof success == 'function') {
+					if (typeof success === 'function') {
 						success(data, status);
 					}
 				},
 				error: function(data, status) {
-					if(typeof error == 'function') {
+					if (typeof error === 'function') {
 						error(data, status);
 					}
 				}
@@ -492,11 +486,11 @@ define(function(require){
 		cleanFormData: function(data) {
 			var self = this;
 
-			if(data.server_name === '' || !('server_name' in data)) {
-				data.server_name = "PBX " + data.extra.serverid;
+			if (data.server_name === '' || !('server_name' in data)) {
+				data.server_name = 'PBX ' + data.extra.serverid;
 			}
 
-			if(data.hasOwnProperty('extra') && data.extra.hasOwnProperty('compatibilityMode')) {
+			if (data.hasOwnProperty('extra') && data.extra.hasOwnProperty('compatibilityMode')) {
 				data.options.media_handling = data.extra.compatibilityMode === true ? 'process' : 'bypass';
 			}
 
@@ -512,11 +506,10 @@ define(function(require){
 
 			self.cleanFormData(endpointData);
 
-			if(endpointData.server_name) {
-				if((index || index === 0) && index !== 'new') {
+			if (endpointData.server_name) {
+				if ((index || index === 0) && index !== 'new') {
 					$.extend(true, new_data.servers[index], endpointData);
-				}
-				else {
+				} else {
 					new_data.servers.push($.extend(true, {
 						DIDs: {},
 						options: {
@@ -541,8 +534,7 @@ define(function(require){
 				self.cleanBeforeUpdate(new_data.servers[index], endpointData);
 
 				self.updateOldTrunkstore(new_data, success, error);
-			}
-			else {
+			} else {
 				monster.ui.alert('formatting_error');
 			}
 		},
@@ -550,14 +542,13 @@ define(function(require){
 		cleanBeforeUpdate: function(serverData, endpointData) {
 			var self = this;
 			// if codecs weren't set on the new endpoint, or if the compatibility mode was not set, delete codecs key
-			if(endpointData.options.media_handling === 'bypass' || !endpointData.options.hasOwnProperty('codecs') || endpointData.options.codecs.length === 0) {
+			if (endpointData.options.media_handling === 'bypass' || !endpointData.options.hasOwnProperty('codecs') || endpointData.options.codecs.length === 0) {
 				delete serverData.options.codecs;
 			}
 
-			if(endpointData.auth.auth_method !== 'IP') {
+			if (endpointData.auth.auth_method !== 'IP') {
 				delete serverData.auth.ip;
-			}
-			else {
+			} else {
 				delete serverData.auth.auth_password;
 				delete serverData.auth.auth_user;
 			}
@@ -566,13 +557,13 @@ define(function(require){
 		normalizeData: function(data) {
 			var self = this;
 
-			// We don't accept false for a disabled feature anymore, so we delete the key now. 
+			// We don't accept false for a disabled feature anymore, so we delete the key now.
 			// We also delete empty key set at the servers level
 			$.each(data.servers, function(k, server) {
 				delete data.servers[k][''];
 				$.each(server.DIDs, function(k2, number) {
 					$.each(number, function(k3, feature) {
-						if(feature === false) {
+						if (feature === false) {
 							delete data.servers[k].DIDs[k2][k3];
 						}
 					});
@@ -596,12 +587,12 @@ define(function(require){
 				success: function(_data, status) {
 					toastr.success(self.i18n.active().changesSaved);
 
-					if(typeof success == 'function') {
+					if (typeof success === 'function') {
 						success(_data, status);
 					}
 				},
 				error: function(_data, status) {
-					if(typeof error == 'function') {
+					if (typeof error === 'function') {
 						error(_data, status);
 					}
 				}
@@ -613,7 +604,7 @@ define(function(require){
 
 			$('.wizard-top-bar', parent).hide();
 			$('.wizard-content-step', parent).hide();
-			$('.wizard-content-step[data-step="'+ step_index +'"]', parent).show();
+			$('.wizard-content-step[data-step="' + step_index + '"]', parent).show();
 
 			$('.wizard-buttons button', parent).hide();
 			$('.cancel', parent).show();
@@ -621,27 +612,30 @@ define(function(require){
 
 			$('#list_pbxs_navbar').hide();
 
-			$('.cancel', parent).off()
-								.on('click', function(ev) {
-				ev.preventDefault();
+			$('.cancel', parent)
+				.off()
+				.on('click', function(ev) {
+					ev.preventDefault();
 
-				monster.pub('pbxsManager.edit', { id: data.extra.id || 0});
-			});
+					monster.pub('pbxsManager.edit', {
+						id: data.extra.id || 0
+					});
+				});
 		},
 
 		initializeWizard: function(parent, callback_submit, step) {
 			var self = this,
-				max_step = parseInt($('.wizard-top-bar', parent).attr('data-max_step'));
+				max_step = parseInt($('.wizard-top-bar', parent).attr('data-max_step')),
+				current_step;
 
 			$('.wizard-top-bar', parent).attr('data-active_step', step || 1);
 
 			$('.wizard-content-step', parent).hide();
 			$('.wizard-content-step[data-step="1"]', parent).show();
 
-			if(max_step !== 1) {
+			if (max_step !== 1) {
 				$('.submit-btn', parent).hide();
-			}
-			else {
+			} else {
 				$('.next-step', parent).hide();
 			}
 
@@ -649,7 +643,7 @@ define(function(require){
 
 			$('.step', parent).on('click', function() {
 				var step = $(this).data('step');
-				if($(this).hasClass('completed')) {
+				if ($(this).hasClass('completed')) {
 					self.validate_step($('.wizard-top-bar', parent).attr('data-active_step'), parent, function() {
 						self.change_step(step, max_step, parent);
 					});
@@ -684,7 +678,7 @@ define(function(require){
 				current_step = parseInt($('.wizard-top-bar', parent).attr('data-active_step'));
 
 				self.validate_step(current_step, parent, function() {
-					if(typeof callback_submit === 'function') {
+					if (typeof callback_submit === 'function') {
 						callback_submit();
 					}
 				});
@@ -695,26 +689,26 @@ define(function(require){
 			var self = this;
 
 			$('.step', parent).removeClass('active');
-			$('.step[data-step="'+step_index+'"]', parent).addClass('active');
+			$('.step[data-step="' + step_index + '"]', parent).addClass('active');
 
-			for(var i = step_index; i >= 1; --i) {
-				$('.step[data-step="'+i+'"]', parent).addClass('completed');
+			for (var i = step_index; i >= 1; --i) {
+				$('.step[data-step="' + i + '"]', parent).addClass('completed');
 			}
 
 			$('.wizard-content-step', parent).hide();
-			$('.wizard-content-step[data-step="'+ step_index +'"]', parent).show();
+			$('.wizard-content-step[data-step="' + step_index + '"]', parent).show();
 
 			$('.cancel', parent).hide();
 			$('.prev-step', parent).show();
 			$('.next-step', parent).show();
 			$('.submit-btn', parent).hide();
 
-			if(step_index === max_step) {
+			if (step_index === max_step) {
 				$('.next-step', parent).hide();
 				$('.submit-btn', parent).show();
 			}
 
-			if(step_index === 1) {
+			if (step_index === 1) {
 				$('.prev-step', parent).hide();
 				$('.cancel', parent).show();
 			}
@@ -730,56 +724,52 @@ define(function(require){
 
 			var form_data = monster.ui.getFormData('endpoint');
 
-			if(validated) {
-				if(step === 1) {
-					if($('.pbx-brand-list .pbx.selected', parent).size() === 0) {
+			if (validated) {
+				if (step === 1) {
+					if ($('.pbx-brand-list .pbx.selected', parent).size() === 0) {
 						error_message += '<br/>- ' + self.i18n.active().no_pbx_selected;
 						validated = false;
 					}
-				}
-				else if(step === 2) {
-				}
-				else if(step === 3) {
+				} else if (step === 2) {
+				} else if (step === 3) {
 				}
 
-				if(validated === true) {
-					if(typeof callback === 'function') {
+				if (validated === true) {
+					if (typeof callback === 'function') {
 						callback();
 					}
-				}
-				else {
+				} else {
 					monster.ui.alert(error_message);
 				}
 			}
 		},
 
 		renderEndpoint: function(data, endpointData, target, callbacks, parent) {
-			if(!endpointData.server_name) {
+			if (!endpointData.server_name) {
 				endpointData.server_name = null;
 			}
 
 			var self = this,
-				interval,
 				interval_bar,
 				current_automatic_step = 1,
 				pause_polling = false,
 				submit_wizard_callback = function() {
 					var form_data = monster.ui.getFormData('endpoint');
 
-					form_data.auth.auth_method = $('input[type="radio"][name="auth.auth_method"]:checked', endpointHtml).val(),
-					form_data.server_type = $('.pbx-brand-list .pbx.selected', endpointHtml).data('pbx_name'),
+					form_data.auth.auth_method = $('input[type="radio"][name="auth.auth_method"]:checked', endpointHtml).val();
+					form_data.server_type = $('.pbx-brand-list .pbx.selected', endpointHtml).data('pbx_name');
 					form_data.cfg = $.extend(true, cfg, form_data.cfg);
 
-					if(form_data.extra.compatibilityMode) {
+					if (form_data.extra.compatibilityMode) {
 						var codecsToSave = audioCodecs.getSelectedItems();
-						if(codecsToSave.length) {
+						if (codecsToSave.length) {
 							form_data.options.codecs = codecsToSave;
 						}
 					}
 
 					self.getAccount(function(globalData) {
 						self.saveEndpoint(form_data, globalData, function(_data) {
-							if(typeof callbacks.saveSuccess == 'function') {
+							if (typeof callbacks.saveSuccess === 'function') {
 								callbacks.saveSuccess(_data);
 							}
 						});
@@ -794,22 +784,21 @@ define(function(require){
 			var audioCodecs = monster.ui.codecSelector('audio', endpointHtml.find('#compatibility_codec_selector'), endpointData.options.codecs || []);
 
 			$.each(endpointData.cfg, function(k, v) {
-				if(typeof v === 'object') {
+				if (typeof v === 'object') {
 					$.each(v, function(k2, v2) {
-						$('button[data-value="'+v2+'"]', $('.btn-group[data-type="'+k+'"]', endpointHtml)).addClass('btn-primary');
+						$('button[data-value="' + v2 + '"]', $('.btn-group[data-type="' + k + '"]', endpointHtml)).addClass('btn-primary');
 					});
-				}
-				else {
-					$('button[data-value="'+v+'"]', $('.btn-group[data-type="'+k+'"]', endpointHtml)).addClass('btn-primary');
+				} else {
+					$('button[data-value="' + v + '"]', $('.btn-group[data-type="' + k + '"]', endpointHtml)).addClass('btn-primary');
 				}
 			});
 
 			self.initializeWizard(endpointHtml, submit_wizard_callback, endpointData.load_step);
 
 			$('.static-ip-block', endpointHtml).hide();
-			$('.static-ip-block[data-value="'+ endpointData.auth.auth_method +'"]', endpointHtml).show();
+			$('.static-ip-block[data-value="' + endpointData.auth.auth_method + '"]', endpointHtml).show();
 
-			endpointHtml.find('[name="extra.compatibilityMode"]').on('change', function(val) {
+			endpointHtml.find('[name="extra.compatibilityMode"]').on('change', function() {
 				var codecSelector = endpointHtml.find('#compatibility_codec_selector');
 
 				$(this).is(':checked') ? codecSelector.addClass('active') : codecSelector.removeClass('active');
@@ -819,18 +808,17 @@ define(function(require){
 				ev.preventDefault();
 
 				var $btn_group = $(this).parent('.btn-group');
-				if($btn_group.data('select') === 'multi') {
+				if ($btn_group.data('select') === 'multi') {
 					$(this).toggleClass('btn-primary');
 
 					cfg[$btn_group.data('type')] = [];
 					$('.btn', $btn_group).each(function(k, v) {
-						if($(v).hasClass('btn-primary')) {
+						if ($(v).hasClass('btn-primary')) {
 							cfg[$btn_group.data('type')].push($(v).data('value'));
 						}
 					});
-				}
-				else {
-					if(!($(this).hasClass('btn-primary'))) {
+				} else {
+					if (!($(this).hasClass('btn-primary'))) {
 						$('.btn', $(this).parent()).removeClass('btn-primary');
 						$(this).addClass('btn-primary');
 					}
@@ -847,23 +835,23 @@ define(function(require){
 
 			$('input[type="radio"][name="auth.auth_method"]', endpointHtml).on('click', function() {
 				$('.static-ip-block', endpointHtml).hide();
-				$('.static-ip-block[data-value="'+$(this).val()+'"]', endpointHtml).slideDown();
+				$('.static-ip-block[data-value="' + $(this).val() + '"]', endpointHtml).slideDown();
 			});
 
 			$('.pbx-brand-list .pbx', endpointHtml).each(function() {
-				if($(this).data('pbx_name') === endpointData.server_type) {
+				if ($(this).data('pbx_name') === endpointData.server_type) {
 					$(this).addClass('selected');
 					$('.pbx-brand-list .pbx:not(.selected)', endpointHtml).css('opacity', '0.2');
 					return false;
 				}
 			});
 
-			if(endpointData.server_type && $('.pbx-brand-list .pbx.selected', endpointHtml).size() === 0) {
+			if (endpointData.server_type && $('.pbx-brand-list .pbx.selected', endpointHtml).size() === 0) {
 				$('.pbx-brand-list .pbx.other', endpointHtml).addClass('selected');
 				$('.pbx-brand-list .pbx:not(.selected)', endpointHtml).css('opacity', '0.2');
 			}
 
-			if(!endpointData.server_type) {
+			if (!endpointData.server_type) {
 				$('.info_pbx', endpointHtml).hide();
 			}
 
@@ -875,10 +863,9 @@ define(function(require){
 				$('.info_pbx', endpointHtml).slideDown();
 			});
 
-			if(endpointData.load_step && endpointData.load_step > 0) {
+			if (endpointData.load_step && endpointData.load_step > 0) {
 				self.loadSpecificStep(endpointData, endpointHtml);
-			}
-			else {
+			} else {
 				$('#list_pbxs_navbar', parent).hide();
 			}
 
@@ -920,16 +907,15 @@ define(function(require){
 
 			arrayNumbers = _.sortBy(arrayNumbers, 'phoneNumber');
 
-			if($.isEmptyObject(didsList)) {
+			if ($.isEmptyObject(didsList)) {
 				numberWrapper.append(monster.template(self, 'noNumbers'));
-			}
-			else {
+			} else {
 				numberWrapper.append(monster.template(self, 'listNumbers', {
 					DIDs: arrayNumbers
 				}));
 
 				_.each(arrayNumbers, function(number) {
-					var numberDiv = numberWrapper.find('[data-phone_number="'+number.phoneNumber+'"]'),
+					var numberDiv = numberWrapper.find('[data-phone_number="' + number.phoneNumber + '"]'),
 						args = {
 							target: numberDiv.find('.number-options'),
 							numberData: number,
@@ -949,7 +935,7 @@ define(function(require){
 		renderPbxsManager: function(data, endpointData, target, callbacks) {
 			var self = this,
 				serverId = endpointData.extra.id,
-				img_link = endpointData.server_type ? endpointData.server_type.replace('.','').toLowerCase() : 'other';
+				img_link = endpointData.server_type ? endpointData.server_type.replace('.', '').toLowerCase() : 'other';
 
 			$.inArray(img_link, self.listAvailablePbxs()) < 0 ? img_link = 'other' : true;
 			endpointData.img_link = img_link;
@@ -958,8 +944,8 @@ define(function(require){
 			endpointData.hidePort = monster.config.whitelabel.hasOwnProperty('hide_port') ? monster.config.whitelabel.hide_port : false;
 
 			$.each(data.data.servers, function(k, v) {
-				if(k !== serverId) {
-					var temp_img_link = v.server_type ? v.server_type.replace('.','').toLowerCase() : 'other';
+				if (k !== serverId) {
+					var temp_img_link = v.server_type ? v.server_type.replace('.', '').toLowerCase() : 'other';
 					$.inArray(temp_img_link, self.listAvailablePbxs()) < 0 ? temp_img_link = 'other' : true;
 
 					endpointData.servers_list.push({
@@ -990,8 +976,7 @@ define(function(require){
 
 				if (!searchString) {
 					rows.show();
-				}
-				else {
+				} else {
 					$.each(rows, function(k, v) {
 						var data = $(this).data(),
 							key = data.search;
@@ -1002,12 +987,12 @@ define(function(require){
 			});
 
 			pbxsManager.on('click', '.number-wrapper', function(event) {
-				if($(event.target).closest('.number-options').size() < 1) {
+				if ($(event.target).closest('.number-options').size() < 1) {
 					var toggleNumberSelected = function(element, updateCb) {
 							var currentCb = element.find('input[type="checkbox"]'),
 								cbValue = currentCb.prop('checked');
 
-							if(updateCb) {
+							if (updateCb) {
 								currentCb.prop('checked', !cbValue);
 							}
 
@@ -1046,7 +1031,6 @@ define(function(require){
 					callbacks: {
 						success: function(numbers) {
 							self.getAccount(function(globalData) {
-
 								_.each(numbers, function(val, key) {
 									globalData.data.servers[serverId].DIDs[key] = {
 										failover: false,
@@ -1074,7 +1058,7 @@ define(function(require){
 					list_numbers.push($(this).data('phone_number'));
 				});
 
-				if(list_numbers.length > 0) {
+				if (list_numbers.length > 0) {
 					var newIndex = $(this).data('index');
 
 					self.getAccount(function(globalData) {
@@ -1093,8 +1077,7 @@ define(function(require){
 							});
 						});
 					});
-				}
-				else {
+				} else {
 					monster.ui.alert(self.i18n.active().no_number_selected);
 				}
 			});
@@ -1102,53 +1085,47 @@ define(function(require){
 			pbxsManager.find('#port_numbers').on('click', function(ev) {
 				ev.preventDefault();
 
-				monster.pub('common.port.render', {
+				monster.pub('common.portWizard.render', {
 					accountId: self.accountId,
 					callbacks: {}
 				});
 			});
 
 			pbxsManager.find('#remove_numbers').on('click', function() {
-				var dataPhoneNumber,
-					phone_number,
+				var phone_number,
 					$selected_numbers = pbxsManager.find('.number-wrapper.selected'),
 					nb_numbers = $selected_numbers.size();
 
-				if(nb_numbers > 0) {
+				if (nb_numbers > 0) {
 					monster.ui.confirm(self.i18n.active().remove_number_confirmation, function() {
-							var array_DIDs = [];
+						var array_DIDs = [];
 
-							$selected_numbers.each(function() {
-								array_DIDs.push($(this).data('phone_number'));
+						$selected_numbers.each(function() {
+							array_DIDs.push($(this).data('phone_number'));
+						});
+
+						self.getAccount(function(_globalData) {
+							$.each(array_DIDs, function(i, k) {
+								if (k in _globalData.data.servers[serverId].DIDs) {
+									delete _globalData.data.servers[serverId].DIDs[k];
+								}
 							});
 
-							self.getAccount(function(_globalData) {
-								$.each(array_DIDs, function(i, k) {
-									if(k in _globalData.data.servers[serverId].DIDs) {
-										delete _globalData.data.servers[serverId].DIDs[k]
-									}
-								});
+							self.updateOldTrunkstore(_globalData.data,
+								function(dataTrunkstore) {
+									self.refreshUnassignedList(function() {
+										self.listNumbersByPbx(serverId, callback_listing, dataTrunkstore.data);
 
-								self.updateOldTrunkstore(_globalData.data,
-									function(dataTrunkstore) {
-										self.refreshUnassignedList(function() {
-											self.listNumbersByPbx(serverId, callback_listing, dataTrunkstore.data);
-
-											self.renderList(serverId, undefined, undefined, dataTrunkstore.data.servers);
-										});
-									},
-									function() {
-										self.listNumbersByPbx(serverId, callback_listing);
-									}
-								);
-							});
-						},
-						function() {
-
-						}
-					);
-				}
-				else {
+										self.renderList(serverId, undefined, undefined, dataTrunkstore.data.servers);
+									});
+								},
+								function() {
+									self.listNumbersByPbx(serverId, callback_listing);
+								}
+							);
+						});
+					}, function() {});
+				} else {
 					monster.ui.alert(self.i18n.active().no_number_selected);
 				}
 			});
@@ -1168,13 +1145,15 @@ define(function(require){
 					unassignedNumbers: unassignedNumbers
 				};
 
-				$('#unassigned_numbers_wrapper').empty()
-												.append(monster.template(self, 'pbxsUnassignedNumbers', data));
+				$('#unassigned_numbers_wrapper')
+					.empty()
+					.append(monster.template(self, 'pbxsUnassignedNumbers', data));
 
-				$('#unassigned_numbers_count').empty()
-											  .html(unassignedNumbers.length);
+				$('#unassigned_numbers_count')
+					.empty()
+					.html(unassignedNumbers.length);
 
-				if(typeof _callback === 'function') {
+				if (typeof _callback === 'function') {
 					_callback();
 				}
 			});
@@ -1190,14 +1169,14 @@ define(function(require){
 				var numbersData = [];
 
 				parent.find('#unassigned_numbers .unassigned-number.selected').each(function(k, v) {
-					if($(v).data('phone_number')) {
+					if ($(v).data('phone_number')) {
 						numbersData.push($(this).data('phone_number'));
 					}
 				});
 
 				serverId = parseInt(parent.find('#pbx_connector_container').data('id'));
 
-				if(serverId >= 0) {
+				if (serverId >= 0) {
 					self.getAccount(function(globalData) {
 						$.each(numbersData, function(k, v) {
 							globalData.data.servers[serverId].DIDs[v] = {};
@@ -1212,8 +1191,7 @@ define(function(require){
 							});
 						});
 					});
-				}
-				else {
+				} else {
 					monster.ui.alert(self.i18n.active().no_pbx_selected);
 				}
 			});
@@ -1223,12 +1201,11 @@ define(function(require){
 					$content = parent.find('#unassigned_numbers .content'),
 					niceScrollBar = $('#unassigned_numbers_wrapper', parent).getNiceScroll()[0];
 
-				if($this.hasClass('open')) {
+				if ($this.hasClass('open')) {
 					$this.removeClass('open');
 					$content.hide();
 					niceScrollBar.resize();
-				}
-				else {
+				} else {
 					$this.addClass('open');
 					$content.slideDown(niceScrollBar.resize);
 				}
@@ -1238,7 +1215,7 @@ define(function(require){
 				var $this = $(this);
 				$this.toggleClass('selected');
 
-				if(!$(event.target).is('input:checkbox')) {
+				if (!$(event.target).is('input:checkbox')) {
 					var $current_cb = $this.find('input[type="checkbox"]'),
 						cb_value = $current_cb.prop('checked');
 
@@ -1264,33 +1241,30 @@ define(function(require){
 					nb_numbers = $selected_numbers.size(),
 					refresh_list = function() {
 						nb_numbers--;
-						if(nb_numbers === 0) {
+						if (nb_numbers === 0) {
 							self.refreshUnassignedList();
 						}
 					};
 
-				if(nb_numbers > 0) {
+				if (nb_numbers > 0) {
 					monster.ui.confirm(self.i18n.active().delete_numbers_confirmation, function() {
-							$selected_numbers.each(function() {
-								dataPhoneNumber = $(this).data('phone_number');
+						$selected_numbers.each(function() {
+							dataPhoneNumber = $(this).data('phone_number');
 
-								if(dataPhoneNumber) {
-									self.deleteNumber(dataPhoneNumber,
-										function() {
-											refresh_list();
-										},
-										function() {
-											refresh_list();
-										}
-									);
-								}
-							});
-						},
-						function() {
-						}
-					);
-				}
-				else {
+							if (dataPhoneNumber) {
+								self.deleteNumber(dataPhoneNumber,
+									function() {
+										refresh_list();
+									},
+									function() {
+										refresh_list();
+									}
+								);
+							}
+						});
+					}, function() {
+					});
+				} else {
 					monster.ui.alert(self.i18n.active().no_number_selected);
 				}
 			});
@@ -1302,7 +1276,7 @@ define(function(require){
 					matches = [],
 					cache = {};
 
-				$.each(rows, function(k, v) {
+				$.each(rows, function() {
 					var data = $(this).data(),
 						key = data.phone_number;
 
@@ -1313,21 +1287,19 @@ define(function(require){
 
 				if (!searchString) {
 					rows.show();
-				}
-				else {
+				} else {
 					rows.hide();
 					$.each(cache, function(phone_number, rowArray) {
-						if (phone_number.indexOf(searchString)>-1) {
+						if (phone_number.indexOf(searchString) > -1) {
 							matches.push(rowArray);
 						}
 					});
 
-					if(matches.length > 0) {
+					if (matches.length > 0) {
 						$.each(matches, function(k, v) {
 							$(v).show();
 						});
-					}
-					else {
+					} else {
 						$('#empty_search', parent).show();
 					}
 				}
@@ -1346,13 +1318,13 @@ define(function(require){
 					var mapCrossbarData = function(data) {
 							var newList = [];
 
-							if(data.length > 0) {
+							if (data.length > 0) {
 								var i = 0;
 								$.each(data, function(key, val) {
 									var countDids = 0;
 
-									$.each(val.DIDs, function(number,obj){
-										countDids ++
+									$.each(val.DIDs, function(number) {
+										countDids++;
 									});
 
 									newList.push({
@@ -1370,27 +1342,27 @@ define(function(require){
 							numbers: mapCrossbarData(data)
 						};
 
-					$('#list_pbxs_navbar #pbxs_manager_listpanel', parent).empty()
-																		  .append(monster.template(self, 'pbxsListElement', dataTemplate))
-																		  .show();
+					$('#list_pbxs_navbar #pbxs_manager_listpanel', parent)
+						.empty()
+						.append(monster.template(self, 'pbxsListElement', dataTemplate))
+						.show();
 
-					$('#list_pbxs_navbar #pbxs_manager_listpanel .pbx-wrapper[data-id='+id+']', parent).addClass('selected');
+					$('#list_pbxs_navbar #pbxs_manager_listpanel .pbx-wrapper[data-id=' + id + ']', parent).addClass('selected');
 
 					$.each(data, function(k, v) {
-						var imgLink = v.server_type ? v.server_type.replace('.','').toLowerCase() : 'other';
+						var imgLink = v.server_type ? v.server_type.replace('.', '').toLowerCase() : 'other';
 
 						$.inArray(imgLink, self.listAvailablePbxs()) < 0 ? imgLink = 'other' : true;
 
-						$('#pbxs_manager_listpanel .pbx-wrapper[data-id="'+k+'"] .img-wrapper', parent).append('<img class="img_style" src="'+self.appPath+'/style/static/images/endpoints/'+ imgLink +'.png" height="49" width=72"/>');
+						$('#pbxs_manager_listpanel .pbx-wrapper[data-id="' + k + '"] .img-wrapper', parent).append('<img class="img_style" src="' + self.appPath + '/style/static/images/endpoints/' + imgLink + '.png" height="49" width=72"/>');
 					});
 
 					callback && callback(data);
 				};
 
-			if(_data) {
+			if (_data) {
 				refreshList(_data);
-			}
-			 else {
+			} else {
 				self.listServers(function(data, status) {
 					refreshList(data);
 				});
@@ -1400,29 +1372,28 @@ define(function(require){
 		listNumbersByPbx: function(id, _callback, _optional_data) {
 			var self = this;
 
-			if(id || id > -1) {
+			if (id || id > -1) {
 				monster.parallel({
-					list_numbers: function(callback){
+					list_numbers: function(callback) {
 						self.listAllNumbers(function(_data_numbers) {
 							callback(null, _data_numbers.data.numbers);
 						});
 					},
-					account: function(callback){
-						if(_optional_data) {
+					account: function(callback) {
+						if (_optional_data) {
 							callback(null, _optional_data);
-						}
-						else {
+						} else {
 							self.getAccount(function(_data) {
 								callback(null, _data.data);
 							});
 						}
 					}
 				},
-				function(err, results){
+				function(err, results) {
 					var json_data = {};
 
-					$.each(results.account.servers[id].DIDs, function(k, v) {
-						if(k in results.list_numbers) {
+					$.each(results.account.servers[id].DIDs, function(k) {
+						if (k in results.list_numbers) {
 							json_data[k] = results.list_numbers[k];
 						}
 					});
@@ -1436,19 +1407,19 @@ define(function(require){
 			var self = this;
 
 			monster.parallel({
-				listNumbers: function(callback){
+				listNumbers: function(callback) {
 					self.listAllNumbers(function(_dataNumbers) {
 						callback(null, _dataNumbers.data);
 					});
 				}
 			},
-			function(err, results){
+			function(err, results) {
 				var tabData = [];
 
 				//Build available numbers list
-				if('numbers' in results.listNumbers) {
+				if ('numbers' in results.listNumbers) {
 					$.each(results.listNumbers.numbers, function(k, v) {
-						if(!v.used_by || v.used_by === '') {
+						if (!v.used_by || v.used_by === '') {
 							tabData.push({
 								phoneNumber: k,
 								isoCountry: 'locality' in v ? (v.locality.country || '') : ''
