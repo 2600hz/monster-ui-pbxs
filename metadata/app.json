@@ -3,12 +3,17 @@
 	"i18n": {
 		"en-US": {
 			"label": "PBX Connector",
-			"description": "PBX Connector allows you to connect your existing PBX to minutes and phone lines on our platform.",
-			"extended_description": "If you don't want to change the PBX you have been using, or if you want to continue using the same PBX for security reasons, it has never been easier to bring your own PBX while using Kazoo minutes and phone lines. This application allows you to select the brand of your PBX, create a username and password and get started instantly with your own hybrid PBX!",
+			"description": "PBX connector allows you to register any legacy PBX. Ideal for clients who are managing on premise PBXs from other vendors, or carriers looking to manage their endpoints seamlessly. PBX Connector lets you sell phone services to companies who wish to continue using legacy PBX systems. You can provide SIP trunks to devices such as Avaya, Cisco and Asterisk PBXes and increase revenue by taking on customers who don’t want to abandon their on-premise equipment but still wish cost and feature benefits of a VoIP service.",
+			"extended_description": "",
 			"features": [
-				"Compliant with all major IP-PBXs (Avaya, Mitel, FreePBX, Asterisk, Cisco, blue.box etc.)",
-				"Simple 3-step process",
-				"Instant hybrid PBX set up"
+				"Compliant with all major IP PBXs (Avaya, Mitel, FreePBX, Asterisk, Cisco, etc)",
+				"Instant hybrid PBX setup ",
+				"Softswitch support",
+				"Multi-site support in a single account",
+				"Integrated number management",
+				"Customizable signaling and media",
+				"Failover and alternate routing",
+				"Support for inbound DIDs / DNIS"
 			]
 		}
 	},
