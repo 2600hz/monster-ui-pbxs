@@ -2,8 +2,7 @@ define(function(require) {
 	var $ = require('jquery'),
 		_ = require('lodash'),
 		monster = require('monster'),
-		toastr = require('toastr'),
-		nicescroll = require('nicescroll');
+		toastr = require('toastr');
 
 	var app = {
 		name: 'pbxs',
@@ -72,11 +71,9 @@ define(function(require) {
 				});
 			});
 
-			pbxsManager.find('#pbxs_manager_listpanel').niceScroll({
-				cursorcolor: '#333',
-				autohidemode: false,
-				cursorborder: '1px solid #666'
-			}).railh.addClass('pbx-fixed-hscroll');
+			pbxsManager
+				.find('#pbxs_manager_listpanel')
+					.addClass('pbx-fixed-hscroll');
 
 			pbxsManager
 				.find('#unassigned_numbers_wrapper')

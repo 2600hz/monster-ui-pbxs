@@ -348,13 +348,20 @@
 **************************************************************************************************************************************************
 *************************************************************************************************************************************************/
 
+.core-content #list_pbxs_navbar {
+	display: flex;
+	height: 115px;
+	padding-bottom: 0;
+	justify-content: space-between;
+}
+
 /* Unassigned Numbers */
 .core-content #list_pbxs_navbar #unassigned_numbers {
 	color: #333;
 	display: none;
 	position: absolute;
 	right: 30px;
-	bottom: 120px;
+	bottom: 135px;
 	width: 270px;
 }
 
@@ -567,8 +574,7 @@
 
 .core-content #list_pbxs_navbar #add_pbx {
 	cursor: pointer;
-	float: right;
-	margin: 0px 5px auto 10px;
+	margin: 7px 5px auto 10px;
 }
 
 .core-content #list_pbxs_navbar #add_pbx .plus-btn{
@@ -834,7 +840,6 @@
 }
 
 .pbx-fixed-hscroll {
-	position: fixed !important;
 	top: auto !important;
 	bottom: 1px !important;
 }
