@@ -78,11 +78,9 @@ define(function(require) {
 				cursorborder: '1px solid #666'
 			}).railh.addClass('pbx-fixed-hscroll');
 
-			pbxsManager.find('#unassigned_numbers_wrapper').niceScroll({
-				cursorcolor: '#333',
-				cursoropacitymin: 0.5,
-				hidecursordelay: 1000
-			}).rail.addClass('unassigned-number-fixed-vscroll');
+			pbxsManager
+				.find('#unassigned_numbers_wrapper')
+					.addClass('unassigned-number-fixed-vscroll');
 		},
 
 		editServer: function(args) {
@@ -1198,16 +1196,14 @@ define(function(require) {
 
 			parent.find('#unassigned_numbers_header').on('click', function() {
 				var $this = $(this),
-					$content = parent.find('#unassigned_numbers .content'),
-					niceScrollBar = $('#unassigned_numbers_wrapper', parent).getNiceScroll()[0];
+					$content = parent.find('#unassigned_numbers .content');
 
 				if ($this.hasClass('open')) {
 					$this.removeClass('open');
 					$content.hide();
-					niceScrollBar.resize();
 				} else {
 					$this.addClass('open');
-					$content.slideDown(niceScrollBar.resize);
+					$content.show();
 				}
 			});
 

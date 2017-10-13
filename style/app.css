@@ -840,7 +840,6 @@
 }
 
 .unassigned-number-fixed-vscroll {
-	position: fixed !important;
 	top: auto !important;
 	bottom: 121px !important;
 }
