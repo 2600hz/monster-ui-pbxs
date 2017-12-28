@@ -2,10 +2,6 @@
 	<div class="unassigned-number number-box" data-phone_number="{{this.phoneNumber}}">
 		<input type="checkbox"></input>
 		<span class="phone-number">{{#monsterNumberWrapper this.phoneNumber}}{{/monsterNumberWrapper}}</span>
-		{{#if this.isoCountry}}
-			<span class="flag"><img src="css/assets/flags/24/{{ this.isoCountry }}.png" height="24" width="24"></img></span>
-		{{/if}}
-
 	</div>
 {{else}}
 	<div class="unassigned-number no-number">{{ i18n.no_number_available }}</div>
