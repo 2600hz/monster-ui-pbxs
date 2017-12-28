@@ -171,9 +171,6 @@ define(function(require) {
 								var num = results.numbers.data.numbers[did];
 								results.account.data.servers[k].DIDs[did].features = num.features;
 								results.account.data.servers[k].DIDs[did].features_available = num.features_available;
-								if ('locality' in num) {
-									results.account.data.servers[k].DIDs[did].isoCountry = num.locality.country || '';
-								}
 							}
 						});
 					});
@@ -1414,8 +1411,7 @@ define(function(require) {
 					$.each(results.listNumbers.numbers, function(k, v) {
 						if (!v.used_by || v.used_by === '') {
 							tabData.push({
-								phoneNumber: k,
-								isoCountry: 'locality' in v ? (v.locality.country || '') : ''
+								phoneNumber: k
 							});
 						}
 					});
