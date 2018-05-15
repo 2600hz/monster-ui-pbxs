@@ -18,8 +18,7 @@
 		}
 	},
 	"tags": [
-		"reseller",
-		"carrier"
+		"admin"
 	],
 	"icon": "PBXconnector_app.png",
 	"api_url": "http://10.26.0.41:8000/v2",
