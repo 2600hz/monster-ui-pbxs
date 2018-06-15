@@ -34,5 +34,6 @@
 		"documentation": "{documentation_url}",
 		"howto": "{howto_video_url}"
 	},
+	"phase": "gold",
 	"pvt_type": "app"
 }
