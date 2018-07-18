@@ -50,7 +50,9 @@ define(function(require) {
 		// subscription handlers
 		_render: function(container) {
 			var self = this,
-				pbxsManager = $(monster.template(self, 'pbxsManager')),
+				pbxsManager = $(self.getTemplate({
+					name: 'pbxsManager'
+				})),
 				parent = _.isEmpty(container) ? $('#monster_content') : container;
 
 			(parent)
@@ -346,7 +348,12 @@ define(function(require) {
 							getAccount();
 						});
 					}, function(_data, status) {
-						var template = monster.template(self, '!' + self.i18n.active().error_signup, { status: status });
+						var template = self.getTemplate({
+							name: '!' + self.i18n.active().error_signup,
+							data: {
+								status: status
+							}
+						});
 
 						monster.ui.alert(template);
 					});
@@ -769,7 +776,10 @@ define(function(require) {
 				},
 				cfg = {},
 				dataTemplate = endpointData,
-				endpointHtml = $(monster.template(self, 'endpoint', dataTemplate));
+				endpointHtml = $(self.getTemplate({
+					name: 'endpoint',
+					data: dataTemplate
+				}));
 
 			monster.ui.tooltips(endpointHtml);
 
@@ -900,11 +910,18 @@ define(function(require) {
 			arrayNumbers = _.sortBy(arrayNumbers, 'phoneNumber');
 
 			if ($.isEmptyObject(didsList)) {
-				numberWrapper.append(monster.template(self, 'noNumbers'));
+				numberWrapper
+					.append($(self.getTemplate({
+						name: 'noNumbers'
+					})));
 			} else {
-				numberWrapper.append(monster.template(self, 'listNumbers', {
-					DIDs: arrayNumbers
-				}));
+				numberWrapper
+					.append($(self.getTemplate({
+						name: 'listNumbers',
+						data: {
+							DIDs: arrayNumbers
+						}
+					})));
 
 				_.each(arrayNumbers, function(number) {
 					var numberDiv = numberWrapper.find('[data-phone_number="' + number.phoneNumber + '"]'),
@@ -948,7 +965,10 @@ define(function(require) {
 				}
 			});
 
-			var pbxsManager = $(monster.template(self, 'endpointNumbers', endpointData)),
+			var pbxsManager = $(self.getTemplate({
+					name: 'endpointNumbers',
+					data: endpointData
+				})),
 				callback_listing = function(data_cb) {
 					self.refreshListNumbers(data_cb, pbxsManager);
 				};
@@ -1055,7 +1075,12 @@ define(function(require) {
 
 					self.getAccount(function(globalData) {
 						var serverName = globalData.data.servers[newIndex].server_name,
-							template = monster.template(self, '!' + self.i18n.active().confirm_move, { serverName: serverName });
+							template = self.getTemplate({
+								name: '!' + self.i18n.active().confirm_move,
+								data: {
+									serverName: serverName
+								}
+							});
 
 						monster.ui.confirm(template, function() {
 							$.each(list_numbers, function(k, v) {
@@ -1139,7 +1164,10 @@ define(function(require) {
 
 				$('#unassigned_numbers_wrapper')
 					.empty()
-					.append(monster.template(self, 'pbxsUnassignedNumbers', data));
+					.append($(self.getTemplate({
+						name: 'pbxsUnassignedNumbers',
+						data: data
+					})));
 
 				$('#unassigned_numbers_count')
 					.empty()
@@ -1334,7 +1362,10 @@ define(function(require) {
 
 					$('#list_pbxs_navbar #pbxs_manager_listpanel', parent)
 						.empty()
-						.append(monster.template(self, 'pbxsListElement', dataTemplate))
+						.append($(self.getTemplate({
+							name: 'pbxsListElement',
+							data: dataTemplate
+						})))
 						.show();
 
 					$('#list_pbxs_navbar #pbxs_manager_listpanel .pbx-wrapper[data-id=' + id + ']', parent).addClass('selected');
