@@ -1,8 +1,7 @@
 define(function(require) {
 	var $ = require('jquery'),
 		_ = require('lodash'),
-		monster = require('monster'),
-		toastr = require('toastr');
+		monster = require('monster');
 
 	var app = {
 		name: 'pbxs',
@@ -584,7 +583,10 @@ define(function(require) {
 					data: data
 				},
 				success: function(_data, status) {
-					toastr.success(self.i18n.active().changesSaved);
+					monster.ui.toast({
+						type: 'success',
+						message: self.i18n.active().changesSaved
+					});
 
 					if (typeof success === 'function') {
 						success(_data, status);
