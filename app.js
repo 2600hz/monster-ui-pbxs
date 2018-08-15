@@ -953,6 +953,9 @@ define(function(require) {
 
 			endpointData.servers_list = [];
 			endpointData.hidePort = monster.config.whitelabel.hasOwnProperty('hide_port') ? monster.config.whitelabel.hide_port : false;
+			endpointData.hideBuyNumbers = monster.config.whitelabel.hasOwnProperty('hideBuyNumbers')
+				? monster.config.whitelabel.hideBuyNumbers
+				: false;
 
 			$.each(data.data.servers, function(k, v) {
 				if (k !== serverId) {
