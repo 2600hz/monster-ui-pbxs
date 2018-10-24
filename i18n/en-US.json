@@ -152,6 +152,8 @@
 	"search": "Search",
 	"assign": "Assign",
 	"delete": "Delete",
+	"select_all": "Select All",
+	"unselect_all": "Unselect All",
 	"no_number_available": "No number available",
 
 	"help_register_time": "This setting literally controls how often we ping your phone system to keep the firewall open. If you don't know or can't control how long your firewall leaves ports open, a good default is 360 seconds.",
