@@ -432,13 +432,6 @@
 	text-align: center;
 }
 
-.core-content #list_pbxs_navbar #unassigned_numbers .content #unassigned_select_all{
-	border-top: 1px solid #fff;
-	border-bottom: 1px solid #ccc;
-	cursor: pointer;
-	height: 50px;
-	line-height: 50px;
-}
 .core-content #list_pbxs_navbar #unassigned_numbers .content #unassigned_actions {
 	border-top: 1px solid #fff;
 	border-bottom: 1px solid #ccc;
