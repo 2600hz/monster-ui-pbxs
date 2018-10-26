@@ -1191,20 +1191,22 @@ define(function(require) {
 			monster.ui.tooltips(parent);
 
 			parent.find('#unassigned_select_all').on('click', function() {
-				var isActive = $(this).hasClass('active');
-				var checkboxes = parent.find('#unassigned_numbers .unassigned-number input[type="checkbox"]');
+				var $this = $(this);
+				var $selectAllLabel = $('.unassigned_select_all_label');
+				var isActive = $this.hasClass('active');
+				var $checkboxes = parent.find('#unassigned_numbers .unassigned-number input[type="checkbox"]');
 
 				if (isActive) {
-					$('.unassigned_select_all_label').html(self.i18n.active().select_all);
-					$(this).removeClass('active');
-					checkboxes.parent().removeClass('selected');
+					$selectAllLabel.html(self.i18n.active().select_all);
+					$this.removeClass('active');
+					$checkboxes.parent().removeClass('selected');
 				} else {
-					$('.unassigned_select_all_label').html(self.i18n.active().unselect_all);
-					$(this).addClass('active');
-					checkboxes.parent().addClass('selected');
+					$selectAllLabel.html(self.i18n.active().unselect_all);
+					$this.addClass('active');
+					$checkboxes.parent().addClass('selected');
 				}
 
-				checkboxes.prop('checked', !isActive);
+				$checkboxes.prop('checked', !isActive);
 			});
 
 			parent.find('.link-box.assign').on('click', function() {
@@ -1253,8 +1255,11 @@ define(function(require) {
 
 			parent.on('click', '.unassigned-number', function(event) {
 				// reset select all button
-				$('#unassigned_select_all').removeClass('active');
-				$('.unassigned_select_all_label').html(self.i18n.active().select_all);
+				var $selectAllBtn = $('#unassigned_select_all');
+				var $selectAllLabel = $('.unassigned_select_all_label');
+
+				$selectAllBtn.removeClass('active');
+				$selectAllLabel.html(self.i18n.active().select_all);
 
 				var $this = $(this);
 				$this.toggleClass('selected');
