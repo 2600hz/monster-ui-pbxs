@@ -1191,18 +1191,21 @@ define(function(require) {
 			monster.ui.tooltips(parent);
 
 			parent.find('#unassigned_select_all').on('click', function() {
-				var $this = $(this);
-				var $selectAllLabel = $('.unassigned_select_all_label');
-				var isActive = $this.hasClass('active');
-				var $checkboxes = parent.find('#unassigned_numbers .unassigned-number input[type="checkbox"]');
+				var $this = $(this),
+					$selectAllLabel = parent.find('.unassigned-select-all-label'),
+					isActive = $this.hasClass('active'),
+					$checkboxes = parent.find('#unassigned_numbers .unassigned-number input[type="checkbox"]'),
+					$selectAllIcon = parent.find('.unassigned-select-all-icon');
+
+				$selectAllIcon.toggleClass('fa-check-square-o');
+				$selectAllIcon.toggleClass('fa-square-o');
+				$this.toggleClass('active');
 
 				if (isActive) {
-					$selectAllLabel.html(self.i18n.active().select_all);
-					$this.removeClass('active');
+					$selectAllLabel.text(self.i18n.active().select_all);
 					$checkboxes.parent().removeClass('selected');
 				} else {
-					$selectAllLabel.html(self.i18n.active().unselect_all);
-					$this.addClass('active');
+					$selectAllLabel.text(self.i18n.active().unselect_all);
 					$checkboxes.parent().addClass('selected');
 				}
 
@@ -1255,11 +1258,15 @@ define(function(require) {
 
 			parent.on('click', '.unassigned-number', function(event) {
 				// reset select all button
-				var $selectAllBtn = $('#unassigned_select_all');
-				var $selectAllLabel = $('.unassigned_select_all_label');
+				var $selectAllBtn = parent.find('#unassigned_select_all'),
+					$selectAllLabel = parent.find('.unassigned-select-all-label'),
+					$selectAllIcon = parent.find('.unassigned-select-all-icon');
+
+				$selectAllIcon.removeClass('fa-square-o');
+				$selectAllIcon.addClass('fa-check-square-o');
 
 				$selectAllBtn.removeClass('active');
-				$selectAllLabel.html(self.i18n.active().select_all);
+				$selectAllLabel.text(self.i18n.active().select_all);
 
 				var $this = $(this);
 				$this.toggleClass('selected');
