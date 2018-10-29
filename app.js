@@ -1197,8 +1197,7 @@ define(function(require) {
 					$checkboxes = parent.find('#unassigned_numbers .unassigned-number input[type="checkbox"]'),
 					$selectAllIcon = parent.find('.unassigned-select-all-icon');
 
-				$selectAllIcon.toggleClass('fa-check-square-o');
-				$selectAllIcon.toggleClass('fa-square-o');
+				$selectAllIcon.toggleClass('fa-square-o fa-check-square-o');
 				$this.toggleClass('active');
 
 				if (isActive) {
@@ -1260,16 +1259,20 @@ define(function(require) {
 				// reset select all button
 				var $selectAllBtn = parent.find('#unassigned_select_all'),
 					$selectAllLabel = parent.find('.unassigned-select-all-label'),
-					$selectAllIcon = parent.find('.unassigned-select-all-icon');
+					$selectAllIcon = parent.find('.unassigned-select-all-icon'),
+					$this = $(this);
 
-				$selectAllIcon.removeClass('fa-square-o');
-				$selectAllIcon.addClass('fa-check-square-o');
-
-				$selectAllBtn.removeClass('active');
-				$selectAllLabel.text(self.i18n.active().select_all);
-
-				var $this = $(this);
 				$this.toggleClass('selected');
+
+				if (parent.find('.unassigned-number.selected').length === parent.find('.unassigned-number').length && !$selectAllBtn.hasClass('active')) {
+					$selectAllBtn.addClass('active');
+					$selectAllIcon.toggleClass('fa-square-o fa-check-square-o');
+					$selectAllLabel.text(self.i18n.active().unselect_all);
+				} else if ($selectAllBtn.hasClass('active')) {
+					$selectAllBtn.removeClass('active');
+					$selectAllIcon.toggleClass('fa-check-square-o fa-square-o');
+					$selectAllLabel.text(self.i18n.active().select_all);
+				}
 
 				if (!$(event.target).is('input:checkbox')) {
 					var $current_cb = $this.find('input[type="checkbox"]'),
