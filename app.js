@@ -1190,6 +1190,27 @@ define(function(require) {
 
 			monster.ui.tooltips(parent);
 
+			parent.find('#unassigned_select_all').on('click', function() {
+				var $this = $(this),
+					$selectAllLabel = parent.find('.unassigned-select-all-label'),
+					isActive = $this.hasClass('active'),
+					$checkboxes = parent.find('#unassigned_numbers .unassigned-number input[type="checkbox"]'),
+					$selectAllIcon = parent.find('.unassigned-select-all-icon');
+
+				$selectAllIcon.toggleClass('fa-square-o fa-check-square-o');
+				$this.toggleClass('active');
+
+				if (isActive) {
+					$selectAllLabel.text(self.i18n.active().select_all);
+					$checkboxes.parent().removeClass('selected');
+				} else {
+					$selectAllLabel.text(self.i18n.active().unselect_all);
+					$checkboxes.parent().addClass('selected');
+				}
+
+				$checkboxes.prop('checked', !isActive);
+			});
+
 			parent.find('.link-box.assign').on('click', function() {
 				var numbersData = [];
 
@@ -1235,8 +1256,23 @@ define(function(require) {
 			});
 
 			parent.on('click', '.unassigned-number', function(event) {
-				var $this = $(this);
+				// reset select all button
+				var $selectAllBtn = parent.find('#unassigned_select_all'),
+					$selectAllLabel = parent.find('.unassigned-select-all-label'),
+					$selectAllIcon = parent.find('.unassigned-select-all-icon'),
+					$this = $(this);
+
 				$this.toggleClass('selected');
+
+				if (parent.find('.unassigned-number.selected').length === parent.find('.unassigned-number').length && !$selectAllBtn.hasClass('active')) {
+					$selectAllBtn.addClass('active');
+					$selectAllIcon.toggleClass('fa-square-o fa-check-square-o');
+					$selectAllLabel.text(self.i18n.active().unselect_all);
+				} else if ($selectAllBtn.hasClass('active')) {
+					$selectAllBtn.removeClass('active');
+					$selectAllIcon.toggleClass('fa-check-square-o fa-square-o');
+					$selectAllLabel.text(self.i18n.active().select_all);
+				}
 
 				if (!$(event.target).is('input:checkbox')) {
 					var $current_cb = $this.find('input[type="checkbox"]'),
