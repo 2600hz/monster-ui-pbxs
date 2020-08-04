@@ -948,7 +948,9 @@ define(function(require) {
 				serverId = endpointData.extra.id,
 				img_link = endpointData.server_type ? endpointData.server_type.replace('.', '').toLowerCase() : 'other';
 
-			$.inArray(img_link, self.listAvailablePbxs()) < 0 ? img_link = 'other' : true;
+			if (!_.includes(self.listAvailablePbxs(), img_link)) {
+				img_link = 'other';
+			}
 			endpointData.img_link = img_link;
 
 			endpointData.servers_list = [];
@@ -960,7 +962,9 @@ define(function(require) {
 			$.each(data.data.servers, function(k, v) {
 				if (k !== serverId) {
 					var temp_img_link = v.server_type ? v.server_type.replace('.', '').toLowerCase() : 'other';
-					$.inArray(temp_img_link, self.listAvailablePbxs()) < 0 ? temp_img_link = 'other' : true;
+					if (!_.includes(self.listAvailablePbxs(), temp_img_link)) {
+						temp_img_link = 'other';
+					}
 
 					endpointData.servers_list.push({
 						index: k,
@@ -1414,7 +1418,9 @@ define(function(require) {
 					$.each(data, function(k, v) {
 						var imgLink = v.server_type ? v.server_type.replace('.', '').toLowerCase() : 'other';
 
-						$.inArray(imgLink, self.listAvailablePbxs()) < 0 ? imgLink = 'other' : true;
+						if (!_.includes(self.listAvailablePbxs(), imgLink)) {
+							imgLink = 'other';
+						}
 
 						$('#pbxs_manager_listpanel .pbx-wrapper[data-id="' + k + '"] .img-wrapper', parent).append('<img class="img_style" src="' + self.appPath + '/style/static/images/endpoints/' + imgLink + '.png" height="49" width=72"/>');
 					});
