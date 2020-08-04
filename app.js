@@ -367,7 +367,7 @@ define(function(require) {
 				resource: 'numbers.get',
 				data: {
 					accountId: self.accountId,
-					phoneNumber: encodeURIComponent(phone_number)
+					phoneNumber: phone_number
 				},
 				success: function(_data, status) {
 					if (typeof success === 'function') {
@@ -389,7 +389,7 @@ define(function(require) {
 				resource: 'numbers.update',
 				data: {
 					accountId: self.accountId,
-					phoneNumber: encodeURIComponent(phone_number),
+					phoneNumber: phone_number,
 					data: data
 				},
 				success: function(_data, status) {
@@ -413,7 +413,7 @@ define(function(require) {
 				resource: 'numbers.create',
 				data: {
 					accountId: self.accountId,
-					phoneNumber: encodeURIComponent(phone_number),
+					phoneNumber: phone_number,
 					data: {}
 				},
 				success: function(_data, status) {
@@ -437,7 +437,7 @@ define(function(require) {
 				resource: 'numbers.activate',
 				data: {
 					accountId: self.accountId,
-					phoneNumber: encodeURIComponent(phone_number),
+					phoneNumber: phone_number,
 					data: {}
 				},
 				success: function(_data, status) {
@@ -460,7 +460,7 @@ define(function(require) {
 				resource: 'numbers.delete',
 				data: {
 					accountId: self.accountId,
-					phoneNumber: encodeURIComponent(phone_number)
+					phoneNumber: phone_number
 				},
 				success: function(data, status) {
 					if (typeof success === 'function') {
