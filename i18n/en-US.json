@@ -186,7 +186,8 @@
 		"e164": "E.164@Realm",
 		"1npan": "1 NPA NXX XXXX@Realm",
 		"username": "SIP_Username@Realm",
-		"npan": "NPA NXX XXXX@Realm"
+		"npan": "NPA NXX XXXX@Realm",
+		"strip_plus": "E164 without +"
 	},
 
 	"changesSaved": "You successfully saved your changes in the PBX Connector!"
